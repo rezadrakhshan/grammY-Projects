@@ -7,6 +7,7 @@ import { lang } from './commands/lang.js';
 import { tasks } from './commands/task.js';
 import mongoose from 'mongoose';
 import { checkUserAuthentication } from './middlewares/auth.js';
+import { clearChat } from './middlewares/clearChat.js';
 
 const token = process.env.BOT_TOKEN;
 
@@ -18,8 +19,9 @@ mongoose
   .catch((err) => console.log(err));
 
 bot.use(checkUserAuthentication);
+bot.use(clearChat);
 bot.use(starts);
 bot.use(lang);
-bot.use(tasks)
+bot.use(tasks);
 
 bot.start();
