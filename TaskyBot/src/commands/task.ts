@@ -60,8 +60,25 @@ tasks.callbackQuery('my tasks', async (ctx) => {
   await ctx.answerCallbackQuery();
 });
 
+tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
+  const taskID = ctx.match[1];
+  await Task.findByIdAndDelete(taskID);
+  await ctx.answerCallbackQuery({text:ctx.t('taskAction.deleteMessage')});
+});
+tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
+  const taskID = ctx.match[1];
+  const task = await Task.findById(taskID);
+  if (!task)
+    await ctx.answerCallbackQuery({ text: ctx.t('taskAction.taskNotFound') });
+  else {
+    task.isDone = !task.isDone;
+    await task.save();
+    await ctx.answerCallbackQuery({text:ctx.t('taskAction.updateMessage')});
+  }
+});
+
 tasks.callbackQuery(/task_(.+)/, async (ctx) => {
-  const taskID = await ctx.match[1];
+  const taskID = ctx.match[1];
   const target = await Task.findById(taskID);
   const result = `
 ${ctx.t('taskList.title')} ${target?.title}

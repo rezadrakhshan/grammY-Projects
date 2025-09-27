@@ -38,3 +38,6 @@ taskList =
 taskAction =
     .changeStatus = 🔄 Mark as Done / Undo
     .remove = 🗑️ Delete Task
+    .deleteMessage = Task Deleted successfully
+    .updateMessage = Task updated successfully
+    .taskNotFound = Task does not exists
