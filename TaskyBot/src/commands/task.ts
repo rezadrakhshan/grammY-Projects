@@ -1,6 +1,7 @@
-import { Composer } from 'grammy';
+import { Composer, InlineKeyboard } from 'grammy';
 import { MyContext } from '../bot.js';
 import { Task } from '../models/task.js';
+import { getTaskAction } from '../keyboards/taskMenu.js';
 
 export const tasks = new Composer<MyContext>();
 
@@ -37,7 +38,47 @@ tasks.on('message:text', async (ctx) => {
       ctx.session.__step = '';
       await ctx.reply(ctx.t('task.complete'));
     } else {
-      await ctx.reply(ctx.t('task.invalidDate'))
+      await ctx.reply(ctx.t('task.invalidDate'));
     }
   }
+});
+
+tasks.callbackQuery('my tasks', async (ctx) => {
+  const target = await Task.find({ userID: ctx.from.id });
+  if (target.length === 0)
+    await ctx.reply(ctx.t('taskList.notFound'), { parse_mode: 'HTML' });
+
+  const result = new InlineKeyboard();
+  target.forEach((task) => {
+    result.text(task.title as string, `task_${task._id}`).row();
+  });
+
+  await ctx.reply(ctx.t('taskList.header'), {
+    reply_markup: result,
+    parse_mode: 'HTML',
+  });
+  await ctx.answerCallbackQuery();
+});
+
+tasks.callbackQuery(/task_(.+)/, async (ctx) => {
+  const taskID = await ctx.match[1];
+  const target = await Task.findById(taskID);
+  const result = `
+${ctx.t('taskList.title')} ${target?.title}
+
+${ctx.t('taskList.description')} ${target?.description}
+
+${ctx.t('taskList.due')} ${target?.due}
+
+${ctx.t('taskList.status')} ${
+    target?.isDone
+      ? ctx.t('taskList.completed') + '✅'
+      : ctx.t('taskList.pending') + '⏳'
+  }
+  `;
+  await ctx.reply(result, {
+    parse_mode: 'HTML',
+    reply_markup: getTaskAction(ctx, String(target?._id)),
+  });
+  await ctx.answerCallbackQuery();
 });

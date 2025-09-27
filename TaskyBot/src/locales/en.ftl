@@ -24,3 +24,17 @@ task =
     .due = ⏰ Please enter the deadline for this task (e.g., 2025-09-30):
     .complete = ✅ Your task has been added successfully!
     .invalidDate = ⚠️ Please enter a valid date in the format YYYY-MM-DD (e.g., 2025-09-26).
+
+taskList = 
+    .header = <b>📋 Task List</b>
+    .title = <b>1️⃣ Title:</b>
+    .description = <i>📝 Description:</i>
+    .due = <i>⏰ Due:</i>
+    .status = <i>👾 Status:</i>
+    .notFound = <i>✨ Your task list is empty. Start by creating a new task!</i>
+    .pending = Pending
+    .completed = Completed
+
+taskAction =
+    .changeStatus = 🔄 Mark as Done / Undo
+    .remove = 🗑️ Delete Task
