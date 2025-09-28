@@ -7,8 +7,6 @@ start =
     • Search and filter your tasks  
     • Export reports (PDF)  
 
-    ⚙️ Select an option below to get started:
-
 
 language = 🌐 Please choose your language:
 

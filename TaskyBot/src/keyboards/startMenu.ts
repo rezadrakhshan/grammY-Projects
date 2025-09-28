@@ -1,11 +1,11 @@
-import { InlineKeyboard } from 'grammy';
+import { Keyboard } from 'grammy';
 import { MyContext } from '../bot.js';
 
 export function getStartMenu(ctx: MyContext) {
-  return new InlineKeyboard()
-    .text(ctx.t('menu.create'), 'new task')
-    .text(ctx.t('menu.list'), 'my tasks')
+  return new Keyboard()
+    .text(ctx.t('menu.create'))
+    .text(ctx.t('menu.list'))
     .row()
-    .text(ctx.t('menu.reminder'), 'reminders')
-    .text(ctx.t('menu.settings'), 'settings');
+    .text(ctx.t('menu.reminder'))
+    .text(ctx.t('menu.settings')).resized()
 }

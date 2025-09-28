@@ -5,13 +5,26 @@ import { getTaskAction } from '../keyboards/taskMenu.js';
 
 export const tasks = new Composer<MyContext>();
 
-tasks.callbackQuery('new task', async (ctx) => {
-  await ctx.reply(ctx.t('task.title'));
-  ctx.session.__step = 'title';
-});
-
 tasks.on('message:text', async (ctx) => {
-  if (ctx.session.__step === 'title') {
+  if (ctx.message.text == ctx.t('menu.create')) {
+    await ctx.reply(ctx.t('task.title'));
+    ctx.session.__step = 'title';
+  } else if (ctx.message.text == ctx.t('menu.list')) {
+    const target = await Task.find({ userID: ctx.from.id });
+    if (target.length === 0)
+      await ctx.reply(ctx.t('taskList.notFound'), { parse_mode: 'HTML' });
+    else {
+      const result = new InlineKeyboard();
+      target.forEach((task) => {
+        result.text(task.title as string, `task_${task._id}`).row();
+      });
+
+      await ctx.reply(ctx.t('taskList.header'), {
+        reply_markup: result,
+        parse_mode: 'HTML',
+      });
+    }
+  } else if (ctx.session.__step === 'title') {
     if (!ctx.session.__task) {
       ctx.session.__task = { title: '', description: '' };
     }
@@ -43,37 +56,19 @@ tasks.on('message:text', async (ctx) => {
   }
 });
 
-tasks.callbackQuery('my tasks', async (ctx) => {
-  const target = await Task.find({ userID: ctx.from.id });
-  if (target.length === 0)
-    await ctx.reply(ctx.t('taskList.notFound'), { parse_mode: 'HTML' });
-
-  const result = new InlineKeyboard();
-  target.forEach((task) => {
-    result.text(task.title as string, `task_${task._id}`).row();
-  });
-
-  await ctx.reply(ctx.t('taskList.header'), {
-    reply_markup: result,
-    parse_mode: 'HTML',
-  });
-  await ctx.answerCallbackQuery();
-});
-
 tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
   const taskID = ctx.match[1];
   await Task.findByIdAndDelete(taskID);
-  await ctx.answerCallbackQuery({text:ctx.t('taskAction.deleteMessage')});
+  await ctx.reply(ctx.t('taskAction.deleteMessage'));
 });
 tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
   const taskID = ctx.match[1];
   const task = await Task.findById(taskID);
-  if (!task)
-    await ctx.answerCallbackQuery({ text: ctx.t('taskAction.taskNotFound') });
+  if (!task) await ctx.reply(ctx.t('taskAction.taskNotFound'));
   else {
     task.isDone = !task.isDone;
     await task.save();
-    await ctx.answerCallbackQuery({text:ctx.t('taskAction.updateMessage')});
+    await ctx.reply(ctx.t('taskAction.updateMessage'));
   }
 });
 
