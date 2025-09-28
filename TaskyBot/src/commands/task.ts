@@ -56,6 +56,7 @@ tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
   await Task.findByIdAndDelete(taskID);
   await ctx.reply(ctx.t('taskAction.deleteMessage'));
 });
+
 tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
   const taskID = ctx.match[1];
   const task = await Task.findById(taskID);

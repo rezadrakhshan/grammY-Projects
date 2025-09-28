@@ -8,6 +8,7 @@ import { tasks } from './commands/task.js';
 import mongoose from 'mongoose';
 import { checkUserAuthentication } from './middlewares/auth.js';
 import { clearChat } from './middlewares/clearChat.js';
+import { setCommandMenu } from './keyboards/commandMenu.js';
 
 const token = process.env.BOT_TOKEN;
 
@@ -23,5 +24,6 @@ bot.use(clearChat);
 bot.use(starts);
 bot.use(lang);
 bot.use(tasks);
+setCommandMenu(bot).catch(console.error);
 
 bot.start();
