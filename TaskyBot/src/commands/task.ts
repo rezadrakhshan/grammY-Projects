@@ -6,42 +6,37 @@ import { getTaskAction } from '../keyboards/taskMenu.js';
 export const tasks = new Composer<MyContext>();
 
 tasks.on('message:text', async (ctx) => {
-  if (ctx.message.text == ctx.t('menu.create')) {
+  if (ctx.message.text === ctx.t('menu.create')) {
     await ctx.reply(ctx.t('task.title'));
     ctx.session.__step = 'title';
-  } else if (ctx.message.text == ctx.t('menu.list')) {
+  } else if (ctx.message.text === ctx.t('menu.list')) {
     const target = await Task.find({ userID: ctx.from.id });
-    if (target.length === 0)
+    if (target.length === 0) {
       await ctx.reply(ctx.t('taskList.notFound'), { parse_mode: 'HTML' });
-    else {
+    } else {
       const result = new InlineKeyboard();
       target.forEach((task) => {
         result.text(task.title as string, `task_${task._id}`).row();
       });
-
       await ctx.reply(ctx.t('taskList.header'), {
         reply_markup: result,
         parse_mode: 'HTML',
       });
     }
   } else if (ctx.session.__step === 'title') {
-    if (!ctx.session.__task) {
-      ctx.session.__task = { title: '', description: '' };
-    }
+    ctx.session.__task = ctx.session.__task ?? { title: '', description: '' };
     ctx.session.__task.title = ctx.message.text;
     await ctx.reply(ctx.t('task.description'));
     ctx.session.__step = 'description';
   } else if (ctx.session.__step === 'description') {
-    if (ctx.session.__task) {
+    if (ctx.session.__task?.description)
       ctx.session.__task.description = ctx.message.text;
-    }
     await ctx.reply(ctx.t('task.due'));
     ctx.session.__step = 'due';
   } else if (ctx.session.__step === 'due') {
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
     if (dateRegex.test(ctx.message.text)) {
-      const result = await new Task({
+      await new Task({
         userID: ctx.from.id,
         title: ctx.session.__task?.title,
         description: ctx.session.__task?.description,
@@ -75,22 +70,39 @@ tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
 tasks.callbackQuery(/task_(.+)/, async (ctx) => {
   const taskID = ctx.match[1];
   const target = await Task.findById(taskID);
-  const result = `
-${ctx.t('taskList.title')} ${target?.title}
 
-${ctx.t('taskList.description')} ${target?.description}
+  if (!target) {
+    await ctx.reply(ctx.t('taskAction.taskNotFound'));
+    return await ctx.answerCallbackQuery();
+  }
 
-${ctx.t('taskList.due')} ${target?.due}
+  const today = new Date().toISOString().slice(0, 10);
+  const isDueToday = today === target.due;
 
-${ctx.t('taskList.status')} ${
-    target?.isDone
+  const formatTask = (strike: boolean) => `
+${strike ? '<s>' : ''}${ctx.t('taskList.title')} ${target.title}${
+    strike ? '</s>' : ''
+  }
+${strike ? '<s>' : ''}${ctx.t('taskList.description')} ${target.description}${
+    strike ? '</s>' : ''
+  }
+${strike ? '<s>' : ''}${ctx.t('taskList.due')} ${target.due}${
+    strike ? '</s>' : ''
+  }
+${strike ? '<s>' : ''}${ctx.t('taskList.status')} ${
+    target.isDone
       ? ctx.t('taskList.completed') + '✅'
       : ctx.t('taskList.pending') + '⏳'
-  }
-  `;
-  await ctx.reply(result, {
+  }${strike ? '</s>' : ''}
+${isDueToday ? ctx.t('taskList.deadline') : ''}
+`;
+
+  await ctx.reply(formatTask(isDueToday), {
     parse_mode: 'HTML',
-    reply_markup: getTaskAction(ctx, String(target?._id)),
+    ...(isDueToday
+      ? {}
+      : { reply_markup: getTaskAction(ctx, String(target._id)) }),
   });
+
   await ctx.answerCallbackQuery();
 });

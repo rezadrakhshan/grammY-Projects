@@ -32,6 +32,7 @@ taskList =
     .notFound = <i>✨ Your task list is empty. Start by creating a new task!</i>
     .pending = Pending
     .completed = Completed
+    .deadline = 🕒 Time’s up! The deadline has passed.
 
 taskAction =
     .changeStatus = 🔄 Mark as Done / Undo
