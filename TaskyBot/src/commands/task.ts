@@ -23,6 +23,7 @@ tasks.on('message:text', async (ctx) => {
         parse_mode: 'HTML',
       });
     }
+    ctx.session.__step = '';
   } else if (ctx.session.__step === 'title') {
     ctx.session.__task = ctx.session.__task ?? { title: '', description: '' };
     ctx.session.__task.title = ctx.message.text;
@@ -34,13 +35,18 @@ tasks.on('message:text', async (ctx) => {
     await ctx.reply(ctx.t('task.due'));
     ctx.session.__step = 'due';
   } else if (ctx.session.__step === 'due') {
-    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-    if (dateRegex.test(ctx.message.text)) {
+    const dateTimeRegex =
+      /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\s(0\d|1\d|2[0-3]):([0-5]\d)$/;
+    if (dateTimeRegex.test(ctx.message.text)) {
+      const targetDate = new Date(ctx.message.text.replace(' ', 'T'));
+      const targetTimestamp = targetDate.getTime();
+
       await new Task({
         userID: ctx.from.id,
         title: ctx.session.__task?.title,
         description: ctx.session.__task?.description,
         due: ctx.message.text,
+        dueTimeStamps: targetTimestamp,
       }).save();
       ctx.session.__task = { title: '', description: '' };
       ctx.session.__step = '';
@@ -55,6 +61,7 @@ tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
   const taskID = ctx.match[1];
   await Task.findByIdAndDelete(taskID);
   await ctx.reply(ctx.t('taskAction.deleteMessage'));
+  ctx.session.__step = '';
 });
 
 tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
@@ -66,6 +73,7 @@ tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
     await task.save();
     await ctx.reply(ctx.t('taskAction.updateMessage'));
   }
+  ctx.session.__step = '';
 });
 
 tasks.callbackQuery(/task_(.+)/, async (ctx) => {
@@ -77,8 +85,9 @@ tasks.callbackQuery(/task_(.+)/, async (ctx) => {
     return await ctx.answerCallbackQuery();
   }
 
-  const today = new Date().toISOString().slice(0, 10);
-  const isDueToday = today === target.due;
+  const today = Date.now();
+  const diff = target.dueTimeStamps - today;
+  const isExpired = diff <= 0;
 
   const formatTask = (strike: boolean) => `
 ${strike ? '<s>' : ''}${ctx.t('taskList.title')} ${target.title}${
@@ -95,15 +104,16 @@ ${strike ? '<s>' : ''}${ctx.t('taskList.status')} ${
       ? ctx.t('taskList.completed') + '✅'
       : ctx.t('taskList.pending') + '⏳'
   }${strike ? '</s>' : ''}
-${isDueToday ? ctx.t('taskList.deadline') : ''}
+${isExpired ? ctx.t('taskList.deadline') : ''}
 `;
 
-  await ctx.reply(formatTask(isDueToday), {
+  await ctx.reply(formatTask(isExpired), {
     parse_mode: 'HTML',
-    ...(isDueToday
+    ...(isExpired
       ? {}
       : { reply_markup: getTaskAction(ctx, String(target._id)) }),
   });
 
+  ctx.session.__step = '';
   await ctx.answerCallbackQuery();
 });

@@ -7,6 +7,7 @@ const taskSchema = new mongoose.Schema(
     description: { type: String, default: '' },
     isDone: { type: Boolean, default: false },
     due: { type: String, required: true },
+    dueTimeStamps: { type: Number, required: true },
   },
   { timestamps: true },
 );

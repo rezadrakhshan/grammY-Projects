@@ -19,9 +19,9 @@ menu =
 task = 
     .title = ✍️ Please enter the task title:  
     .description = 📝 Now, add a description for your task:  
-    .due = ⏰ Please enter the deadline for this task (e.g., 2025-09-30):
+    .due = ⏰ Please enter the deadline for this task (e.g., 2025-09-30 00:00):
     .complete = ✅ Your task has been added successfully!
-    .invalidDate = ⚠️ Please enter a valid date in the format YYYY-MM-DD (e.g., 2025-09-26).
+    .invalidDate = ⚠️ Please enter a valid date in the format YYYY-MM-DD (e.g., 2025-09-26 00:00).
 
 taskList = 
     .header = <b>📋 Task List</b>
