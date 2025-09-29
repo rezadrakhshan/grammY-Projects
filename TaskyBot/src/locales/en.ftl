@@ -40,3 +40,21 @@ taskAction =
     .deleteMessage = Task Deleted successfully
     .updateMessage = Task updated successfully
     .taskNotFound = Task does not exists
+
+reminders = 
+    .header = ⏲️ Please choose your option:
+    .choose = Please choose a task to set a reminder for.
+    .set = Reminder set successfully! ⏰
+    .remove = Reminder removed successfully. 🗑️
+    .invalidTime = ⚠️ Please enter a valid time format (HH:MM).
+    .alreadySet = A reminder is already set for this task.
+    .snooze = Snoozed for {minutes} minutes. 😴
+    .noTask = You have no tasks to set a reminder for.
+    .upcoming = Upcoming reminders:
+    .none = You have no active reminders.
+
+reminder_keyboard =
+    .list = View reminders 📋
+    .add = Add a reminder ➕
+    .remove = Remove a reminder 🗑️
+    .back = Back 🔙

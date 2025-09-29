@@ -2,6 +2,7 @@ import { Composer, InlineKeyboard } from 'grammy';
 import { MyContext } from '../bot.js';
 import { Task } from '../models/task.js';
 import { getTaskAction } from '../keyboards/taskMenu.js';
+import { setReminderMenu } from '../keyboards/reminderMenu.js';
 
 export const tasks = new Composer<MyContext>();
 
@@ -9,6 +10,11 @@ tasks.on('message:text', async (ctx) => {
   if (ctx.message.text === ctx.t('menu.create')) {
     await ctx.reply(ctx.t('task.title'));
     ctx.session.__step = 'title';
+  } else if (ctx.message.text === ctx.t('menu.reminder')) {
+    ctx.session.__step = '';
+    await ctx.reply(ctx.t('reminders.header'), {
+      reply_markup: setReminderMenu(ctx),
+    });
   } else if (ctx.message.text === ctx.t('menu.list')) {
     const target = await Task.find({ userID: ctx.from.id });
     if (target.length === 0) {
