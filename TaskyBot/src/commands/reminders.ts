@@ -89,6 +89,14 @@ reminders.callbackQuery('reminder_list', async (ctx) => {
   }
 });
 
+reminders.callbackQuery(/reminder_(.+)_remove/, async (ctx) => {
+  await ctx.answerCallbackQuery()
+  const reminderID = ctx.match[1];
+  await Reminder.findByIdAndDelete(reminderID);
+  await ctx.reply(ctx.t('reminders.remove'));
+  ctx.session.__step = '';
+});
+
 reminders.callbackQuery(/reminder_(.+)/, async (ctx) => {
   await ctx.answerCallbackQuery();
   const reminder = await Reminder.findById(ctx.match[1]);
@@ -113,3 +121,5 @@ ${strike ? '<s>' : ''}${ctx.t('reminder_detail.date')} ${reminder.date}${
     await ctx.answerCallbackQuery({ text: 'Task or reminder does not exists' });
   }
 });
+
+

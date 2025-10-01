@@ -62,11 +62,12 @@ tasks.on('message:text', async (ctx) => {
       await ctx.reply(ctx.t('task.invalidDate'));
     }
   } else if (ctx.session.__step === 'time') {
-    createReminder(ctx); 
+    createReminder(ctx);
   }
 });
 
 tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
+  await ctx.answerCallbackQuery();
   const taskID = ctx.match[1];
   await Task.findByIdAndDelete(taskID);
   await ctx.reply(ctx.t('taskAction.deleteMessage'));
@@ -74,6 +75,7 @@ tasks.callbackQuery(/task_(.+)_remove/, async (ctx) => {
 });
 
 tasks.callbackQuery(/task_(.+)_update/, async (ctx) => {
+  await ctx.answerCallbackQuery();
   const taskID = ctx.match[1];
   const task = await Task.findById(taskID);
   if (!task) await ctx.reply(ctx.t('taskAction.taskNotFound'));
