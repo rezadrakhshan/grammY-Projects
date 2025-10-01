@@ -2,6 +2,7 @@ import { Composer, InlineKeyboard } from 'grammy';
 import { MyContext } from '../bot.js';
 import { Task } from '../models/task.js';
 import { Reminder } from '../models/reminders.js';
+import { getReminderAction } from '../keyboards/reminderMenu.js';
 
 export const reminders = new Composer<MyContext>();
 
@@ -57,6 +58,7 @@ export async function createReminder(ctx: any) {
         return;
       } else {
         const reminder = await new Reminder({
+          userID: ctx.from.id,
           task: ctx.session.__reminder.taskID,
           date: ctx.message.text,
           dateTimeStamps: targetTimestamp,
@@ -72,3 +74,42 @@ export async function createReminder(ctx: any) {
     return;
   }
 }
+
+reminders.callbackQuery('reminder_list', async (ctx) => {
+  await ctx.answerCallbackQuery();
+  const userReminders = await Reminder.find({ userID: ctx.from.id });
+  if (userReminders) {
+    const result = new InlineKeyboard();
+    userReminders.forEach((reminder) => {
+      result.text(reminder.date as string, `reminder_${reminder._id}`).row();
+    });
+    await ctx.reply(ctx.t('reminders.list'), { reply_markup: result });
+  } else {
+    await ctx.reply(ctx.t('reminders.noTask'));
+  }
+});
+
+reminders.callbackQuery(/reminder_(.+)/, async (ctx) => {
+  await ctx.answerCallbackQuery();
+  const reminder = await Reminder.findById(ctx.match[1]);
+  const task = await Task.findById(reminder?.task);
+  if (reminder && task) {
+    const done = reminder.dateTimeStamps - Date.now() <= 0;
+    const formatTask = (strike: boolean) => `
+${ctx.t('reminder_detail.header')}
+
+${strike ? '<s>' : ''}${ctx.t('reminder_detail.task')} ${task.title}${
+      strike ? '</s>' : ''
+    }
+${strike ? '<s>' : ''}${ctx.t('reminder_detail.date')} ${reminder.date}${
+      strike ? '</s>' : ''
+    }
+`;
+    await ctx.reply(formatTask(done), {
+      parse_mode: 'HTML',
+      reply_markup: getReminderAction(ctx, reminder.id),
+    });
+  } else {
+    await ctx.answerCallbackQuery({ text: 'Task or reminder does not exists' });
+  }
+});

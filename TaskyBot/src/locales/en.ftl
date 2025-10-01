@@ -45,6 +45,7 @@ reminders =
     .header = ⏲️ Please choose your option:
     .choose = Please choose a task to set a reminder for.
     .set = Reminder set successfully! ⏰
+    .list = 📋 Your reminders is here!
     .remove = Reminder removed successfully. 🗑️
     .time = ⏰ Please enter the time for this reminder (e.g., 2025-09-30 00:00):
     .invalidTime = ⚠️ Please enter a valid time format (2025-09-30 00:00).
@@ -59,3 +60,9 @@ reminder_keyboard =
     .add = Add a reminder ➕
     .remove = Remove a reminder 🗑️
     .back = Back 🔙
+
+reminder_detail = 
+    .header = 🔔 Reminder Details
+    .task = 📝 Task:
+    .date = 📅 Date:
+    .status = ✅ Status:
