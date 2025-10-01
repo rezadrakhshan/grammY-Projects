@@ -54,6 +54,7 @@ reminders =
     .noTask = You have no tasks to set a reminder for.
     .upcoming = Upcoming reminders:
     .none = You have no active reminders.
+    .msg = 🔔 Hey! Don’t forget to get your task done 😉
 
 reminder_keyboard =
     .list = View reminders 📋

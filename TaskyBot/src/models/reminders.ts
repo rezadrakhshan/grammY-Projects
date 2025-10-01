@@ -5,6 +5,7 @@ const reminderSchema = new mongoose.Schema({
   task: { type: mongoose.Schema.Types.ObjectId, ref: 'Task' },
   date: { type: String, required: true },
   dateTimeStamps: { type: Number, required: true },
+  sent: { type: Boolean, default: false },
 });
 
 export const Reminder = mongoose.model('Reminder', reminderSchema);
