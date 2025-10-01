@@ -3,6 +3,7 @@ import { MyContext } from '../bot.js';
 import { Task } from '../models/task.js';
 import { getTaskAction } from '../keyboards/taskMenu.js';
 import { setReminderMenu } from '../keyboards/reminderMenu.js';
+import { createReminder } from './reminders.js';
 
 export const tasks = new Composer<MyContext>();
 
@@ -60,6 +61,8 @@ tasks.on('message:text', async (ctx) => {
     } else {
       await ctx.reply(ctx.t('task.invalidDate'));
     }
+  } else if (ctx.session.__step === 'time') {
+    createReminder(ctx); 
   }
 });
 

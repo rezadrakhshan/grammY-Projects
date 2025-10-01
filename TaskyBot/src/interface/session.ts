@@ -5,8 +5,8 @@ export interface SessionData {
     description?: string;
   };
   __reminder: {
-    taskID: string;
-    date: string;
+    taskID?: string;
+    date?: string;
   };
   __step?: string;
 }
