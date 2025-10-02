@@ -63,6 +63,7 @@ tasks.on('message:text', async (ctx) => {
     }
   } else if (ctx.session.__step === 'time') {
     createReminder(ctx);
+  } else if (ctx.message.text === ctx.t('menu.reports')) {
   }
 });
 

@@ -7,5 +7,6 @@ export function getStartMenu(ctx: MyContext) {
     .text(ctx.t('menu.list'))
     .row()
     .text(ctx.t('menu.reminder'))
-    .text(ctx.t('menu.settings')).resized()
+    .text(ctx.t('menu.reports'))
+    .resized();
 }

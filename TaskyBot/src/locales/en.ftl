@@ -4,7 +4,6 @@ start =
     ✅ With this bot, you can easily manage your tasks:  
     • Create and organize tasks  
     • Get reminders  
-    • Search and filter your tasks  
     • Export reports (PDF)  
 
 
@@ -13,8 +12,8 @@ language = 🌐 Please choose your language:
 menu =
     .create = ➕ New Task  
     .list = 📋 My Tasks  
-    .reminder = ⏰ Reminders  
-    .settings = ⚙️ Settings
+    .reminder = ⏰ Reminders 
+    .reports = 🗃️ Export reports (PDF) 
 
 task = 
     .title = ✍️ Please enter the task title:  
