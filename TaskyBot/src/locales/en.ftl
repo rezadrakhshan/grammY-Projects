@@ -66,3 +66,13 @@ reminder_detail =
     .task = 📝 Task:
     .date = 📅 Date:
     .status = ✅ Status:
+
+pdf = 
+    .header = Task Report
+    .title = Title
+    .description = Description
+    .due = Due
+    .status = Status
+    .done = Finishied
+    .notDone = Active
+    .footer = TaskyBot

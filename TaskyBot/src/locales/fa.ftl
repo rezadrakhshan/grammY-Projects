@@ -66,3 +66,4 @@ reminder_detail =
     .task = 📝 کار:  
     .date = 📅 تاریخ:  
     .status = ✅ وضعیت:  
+

@@ -4,6 +4,7 @@ import { Task } from '../models/task.js';
 import { getTaskAction } from '../keyboards/taskMenu.js';
 import { setReminderMenu } from '../keyboards/reminderMenu.js';
 import { createReminder } from './reminders.js';
+import { generateReports } from './reports.js';
 
 export const tasks = new Composer<MyContext>();
 
@@ -37,7 +38,7 @@ tasks.on('message:text', async (ctx) => {
     await ctx.reply(ctx.t('task.description'));
     ctx.session.__step = 'description';
   } else if (ctx.session.__step === 'description') {
-    if (ctx.session.__task?.description)
+    if (ctx.session.__task?.description === "")
       ctx.session.__task.description = ctx.message.text;
     await ctx.reply(ctx.t('task.due'));
     ctx.session.__step = 'due';
@@ -64,6 +65,7 @@ tasks.on('message:text', async (ctx) => {
   } else if (ctx.session.__step === 'time') {
     createReminder(ctx);
   } else if (ctx.message.text === ctx.t('menu.reports')) {
+    generateReports(ctx)
   }
 });
 
