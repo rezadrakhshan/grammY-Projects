@@ -3,6 +3,8 @@ import { Task } from '../models/task.js';
 import PDFDocument from 'pdfkit';
 import { PassThrough } from 'stream';
 import { InputFile } from 'grammy';
+import path from 'path';
+import { __dirname } from '../bot.js';
 
 export async function generateReports(ctx: MyContext) {
   const tasks = (await Task.find({ userID: ctx.from?.id })) || [];
@@ -13,10 +15,12 @@ export async function generateReports(ctx: MyContext) {
 
   doc.pipe(stream);
 
+  doc.registerFont('vazir',path.join(__dirname, "../src/public/Vazir.ttf"))
+
   doc
     .fillColor('#2E86C1')
     .fontSize(28)
-    .font('Helvetica-Bold')
+    .font('vazir')
     .text(ctx.t('pdf.header'), { align: 'center', underline: true })
     .moveDown(1);
 
@@ -33,7 +37,7 @@ export async function generateReports(ctx: MyContext) {
 
   function drawTableHeader() {
     let x = tableStartX;
-    doc.fontSize(12).font('Helvetica-Bold').fillColor('#1B4F72');
+    doc.fontSize(12).font('vazir').fillColor('#1B4F72');
     headers.forEach((header, i) => {
       doc.rect(x, y, columnWidths[i], 24).fillAndStroke('#D6EAF8', '#AED6F1');
       doc.fillColor('#1B4F72').text(header, x + 6, y + 6, {
@@ -43,7 +47,7 @@ export async function generateReports(ctx: MyContext) {
       x += columnWidths[i];
     });
     y += 24;
-    doc.font('Helvetica').fontSize(11);
+    doc.font('vazir').fontSize(11);
   }
 
   drawTableHeader();
@@ -87,7 +91,7 @@ export async function generateReports(ctx: MyContext) {
     .moveDown(2)
     .fontSize(10)
     .fillColor('#555')
-    .font('Helvetica-Oblique')
+    .font('vazir')
     .text(ctx.t('pdf.footer'), { align: 'center' });
 
   doc.end();
