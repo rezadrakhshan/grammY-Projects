@@ -10,10 +10,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
+    "@grammyjs/i18n": "^1.1.2",
     "dotenv": "^17.2.3",
-    "grammy": "^1.38.3",
+    "grammy": "^1.38.2",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
