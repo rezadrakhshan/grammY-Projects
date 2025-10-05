@@ -5,6 +5,7 @@ import { Bot, Context, session, SessionFlavor } from "grammy";
 import { I18n, I18nFlavor } from "@grammyjs/i18n";
 import { start } from "./command/start.js";
 import { language } from "./command/lang.js";
+import { video } from "./command/video.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { SessionData } from "./interface/session.js";
@@ -29,5 +30,6 @@ bot.use(
 bot.use(i18n);
 bot.use(start);
 bot.use(language);
+bot.use(video)
 
 bot.start();
