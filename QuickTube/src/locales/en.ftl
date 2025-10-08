@@ -7,3 +7,6 @@ lang =
 
 downloads = 
     .track = 🎵 I can download with this tracks:
+    .invalid = Invalid YouTube URL.
+    .downloading = Downloading video :
+    .mb = MB
