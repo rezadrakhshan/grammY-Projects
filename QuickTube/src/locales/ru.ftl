@@ -5,3 +5,5 @@ downloads =
     .invalid = Неверная ссылка на YouTube.,
     .downloading = Скачивание видео :,
     .mb = МБ
+    .error = Ошибка при скачивании.
+    .errorfilesystem = Произошла ошибка файловой системы.
