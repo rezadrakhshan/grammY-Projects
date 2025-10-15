@@ -8,6 +8,7 @@ import { I18n ,I18nFlavor } from "@grammyjs/i18n";
 import path from "path";
 import { fileURLToPath } from "url";
 import { SessionData } from "./interfcae/session.js";
+import { UserMiddleware } from "./middleware/user.js";
 
 
 const __filename = fileURLToPath(import.meta.url)
@@ -38,6 +39,7 @@ bot.use(
 );
 
 bot.use(i18n)
+bot.use(UserMiddleware)
 bot.command(["start", "help"], commandMiddleware);
 
 bot.start();
