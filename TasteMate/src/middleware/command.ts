@@ -1,12 +1,14 @@
-import { type CommandContext, type NextFunction, type Context } from "grammy";
+import { type CommandContext, type NextFunction } from "grammy";
+import { MyContext } from "../index.js";
+import { menu } from "../keyboard/menu.js";
 
 export async function commandMiddleware(
-  ctx: CommandContext<Context>,
+  ctx: CommandContext<MyContext>,
   next: NextFunction
 ) {
   switch (ctx.message?.text) {
     case "/start":
-      await ctx.reply("Welcome to TasteMate");
+      await ctx.reply(ctx.t('start'), { reply_markup:menu });
       break;
     case "/help":
       await ctx.reply("This is help menu");
