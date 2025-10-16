@@ -4,23 +4,19 @@ dotenv.config();
 import { Bot, Context, session, SessionFlavor } from "grammy";
 import mongoose from "mongoose";
 import { commandMiddleware } from "./middleware/command.js";
-import { I18n ,I18nFlavor } from "@grammyjs/i18n";
+import { I18n, I18nFlavor } from "@grammyjs/i18n";
 import path from "path";
 import { fileURLToPath } from "url";
 import { SessionData } from "./interfcae/session.js";
 import { UserMiddleware } from "./middleware/user.js";
+import { location } from "./callback/location.js";
 
-
-const __filename = fileURLToPath(import.meta.url)
-export const __dirname = path.dirname(__filename)
-export type MyContext = Context & SessionFlavor<SessionData> & I18nFlavor
+const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
+export type MyContext = Context & SessionFlavor<SessionData> & I18nFlavor;
 const bot = new Bot<MyContext>(process.env.BOT as string);
 
-const i18n = new I18n<MyContext>({
-	defaultLocale:"en",
-	useSession: true,
-	directory: path.join(__dirname, "../src/locales")
-})
+
 mongoose
   .connect(process.env.DB as string)
   .then(() => {
@@ -30,6 +26,13 @@ mongoose
     console.error(err.msg);
   });
 
+
+const i18n = new I18n<MyContext>({
+  defaultLocale: "fa",
+  useSession: true,
+  directory: path.join(__dirname, "../src/locales"),
+});
+
 bot.use(
   session({
     initial: () => {
@@ -38,8 +41,9 @@ bot.use(
   }),
 );
 
-bot.use(i18n)
-bot.use(UserMiddleware)
+bot.use(i18n);
+bot.use(UserMiddleware);
 bot.command(["start", "help"], commandMiddleware);
+bot.use(location);
 
 bot.start();
