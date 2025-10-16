@@ -10,12 +10,12 @@ import { fileURLToPath } from "url";
 import { SessionData } from "./interfcae/session.js";
 import { UserMiddleware } from "./middleware/user.js";
 import { location } from "./callback/location.js";
+import { foodAdmin } from "./admin/food.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 export type MyContext = Context & SessionFlavor<SessionData> & I18nFlavor;
 const bot = new Bot<MyContext>(process.env.BOT as string);
-
 
 mongoose
   .connect(process.env.DB as string)
@@ -25,7 +25,6 @@ mongoose
   .catch((err) => {
     console.error(err.msg);
   });
-
 
 const i18n = new I18n<MyContext>({
   defaultLocale: "fa",
@@ -45,5 +44,6 @@ bot.use(i18n);
 bot.use(UserMiddleware);
 bot.command(["start", "help"], commandMiddleware);
 bot.use(location);
+bot.use(foodAdmin);
 
 bot.start();
