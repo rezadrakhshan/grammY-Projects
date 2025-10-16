@@ -42,8 +42,8 @@ bot.use(
 
 bot.use(i18n);
 bot.use(UserMiddleware);
+bot.use(foodAdmin);
 bot.command(["start", "help"], commandMiddleware);
 bot.use(location);
-bot.use(foodAdmin);
 
 bot.start();
