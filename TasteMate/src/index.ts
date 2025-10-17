@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 import { SessionData } from "./interfcae/session.js";
 import { UserMiddleware } from "./middleware/user.js";
 import { location } from "./callback/location.js";
-import { foodAdmin } from "./admin/food.js";
+import { admin } from "./admin/admin.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -42,7 +42,7 @@ bot.use(
 
 bot.use(i18n);
 bot.use(UserMiddleware);
-bot.use(foodAdmin);
+bot.use(admin);
 bot.command(["start", "help"], commandMiddleware);
 bot.use(location);
 
