@@ -1,9 +1,10 @@
 import { openai } from "../index.js";
+import { type MyContext } from "../index.js";
 
-export async function askAI(msg: string) {
+export async function askAI(msg: string, ctx: MyContext) {
   try {
     const completion = await openai.chat.completions.create({
-      model: "openai/gpt-4o-mini",
+      model: `${ctx.session.model}`,
       messages: [
         {
           role: "user",
@@ -16,7 +17,8 @@ export async function askAI(msg: string) {
       return (
         completion.choices[0]?.message.content ?? "^_____^ No Response ^_____^"
       );
-  } catch {
+  } catch (err) {
+    console.error(err);
     return "🥲 AI Error!!";
   }
 }
