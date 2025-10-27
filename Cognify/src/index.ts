@@ -6,6 +6,8 @@ import { type Session, initial } from "./interface/session.js";
 import OpenAI from "openai";
 import { answerAI } from "./hanlder/message.js";
 import { modelMenu } from "./keyboard/change_model.js";
+import { start, choose } from "./text.js";
+
 export type MyContext = Context & SessionFlavor<Session>;
 
 const bot = new Bot<MyContext>(process.env.BOT_TOKEN as string);
@@ -27,8 +29,12 @@ bot.on("callback_query:data", async (ctx) => {
   }
 });
 
+bot.command("start", async (ctx) => {
+  await ctx.reply(start);
+});
+
 bot.command("change", async (ctx) => {
-  await ctx.reply("Choose your AI model:", { reply_markup: modelMenu });
+  await ctx.reply(choose, { reply_markup: modelMenu });
 });
 
 bot.on("message:text", answerAI);

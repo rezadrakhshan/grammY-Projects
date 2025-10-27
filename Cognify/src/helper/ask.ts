@@ -15,10 +15,11 @@ export async function askAI(msg: string, ctx: MyContext) {
 
     if (completion)
       return (
-        completion.choices[0]?.message.content ?? "^_____^ No Response ^_____^"
+        completion.choices[0]?.message.content ??
+        "🤖 I didn’t get a valid answer. Please try again."
       );
   } catch (err) {
     console.error(err);
-    return "🥲 AI Error!!";
+    return "❌ An unexpected error occurred. Please try again later.";
   }
 }
