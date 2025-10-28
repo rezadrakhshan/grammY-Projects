@@ -4,7 +4,7 @@ import { type MyContext } from "../index.js";
 export async function askAI(msg: string, ctx: MyContext) {
   try {
     const completion = await openai.chat.completions.create({
-      model: `${ctx.session.model}`,
+      model: `${ctx.session.model ?? "openai/gpt-4o-mini"}`,
       messages: [
         {
           role: "user",

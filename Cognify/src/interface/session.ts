@@ -3,5 +3,5 @@ export interface Session {
 }
 
 export function initial(): Session {
-  return { model: "" };
+  return { model: "openai/gpt-4o-mini" };
 }
