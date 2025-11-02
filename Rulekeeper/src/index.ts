@@ -7,11 +7,14 @@ import { I18n, type I18nFlavor } from "@grammyjs/i18n";
 import { initial } from "./helper/initial.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { connectMongo } from "./database/mongo.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 export type MyContext = Context & SessionFlavor<Session> & I18nFlavor;
 const bot = new Bot<MyContext>(process.env.BOT as string);
+
+connectMongo();
 
 const i18n = new I18n({
   defaultLocale: "en",

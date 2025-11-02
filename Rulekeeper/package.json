@@ -18,6 +18,7 @@
   "dependencies": {
     "@grammyjs/i18n": "^1.1.2",
     "dotenv": "^17.2.3",
-    "grammy": "^1.38.3"
+    "grammy": "^1.38.3",
+    "mongoose": "^8.19.2"
   }
 }
