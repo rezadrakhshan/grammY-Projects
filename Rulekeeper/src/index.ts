@@ -8,6 +8,7 @@ import { initial } from "./helper/initial.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectMongo } from "./database/mongo.js";
+import { mainComposer } from "./bot/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -25,8 +26,6 @@ const i18n = new I18n({
 bot.use(session({ initial }));
 bot.use(i18n);
 
-bot.command("start", async (ctx) => {
-  await ctx.reply(ctx.t("start"));
-});
+bot.use(mainComposer);
 
 bot.start();
