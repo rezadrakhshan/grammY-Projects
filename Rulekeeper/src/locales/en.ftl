@@ -22,3 +22,14 @@ new_text = ⚠️ Important!
 
     Once done, you’re all set! 🎉
 
+bot_removed= ⚠️ Attention
+
+    RuleKeeper has been removed from the group:
+    Group Name: { $group_title }
+    Group ID: { $group_id }
+
+    All settings and group data for this group have been deleted from the database.
+
+    If this was a mistake, you can add RuleKeeper back to the group at any time using the invitation link.
+
+
