@@ -8,6 +8,7 @@ index.on("my_chat_member", async (ctx) => {
   const chat = ctx.chat;
 
   const status = ctx.myChatMember.new_chat_member.status;
+  const oldStatus = ctx.myChatMember.old_chat_member.status;
   if (status === "kicked" || status === "left") {
     const group: any = await Group.findOneAndDelete(
       { chatID: chat.id },
@@ -22,6 +23,12 @@ index.on("my_chat_member", async (ctx) => {
         }),
       );
     }
+    return;
+  } else if (status === "administrator") {
+    await ctx.reply(ctx.t("set_for_admin"));
+    return;
+  } else if (oldStatus === "administrator" && status === "member") {
+    await ctx.reply(ctx.t("new_text"));
     return;
   }
   let chatData = {

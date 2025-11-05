@@ -32,4 +32,9 @@ bot_removed= ⚠️ Attention
 
     If this was a mistake, you can add RuleKeeper back to the group at any time using the invitation link.
 
+set_for_admin = ✅ RuleKeeper is now an admin in this group!
 
+    Thank you for granting admin access.  
+    Now I can help you manage the group — remove spam, enforce rules, welcome new members, and keep everything organized!
+
+    Use /settings to configure features and customize RuleKeeper’s behavior.
