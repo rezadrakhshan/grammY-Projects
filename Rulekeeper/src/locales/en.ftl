@@ -38,3 +38,9 @@ set_for_admin = ✅ RuleKeeper is now an admin in this group!
     Now I can help you manage the group — remove spam, enforce rules, welcome new members, and keep everything organized!
 
     Use /settings to configure features and customize RuleKeeper’s behavior.
+
+welcome_successful = 🎉 The welcome message has been successfully updated!
+     New members will now see your custom message when they join the group.
+
+welcome_unsuccessful = ⚠️ Failed to set the welcome message.
+     Please make sure your message isn’t empty or too long, and try again.
