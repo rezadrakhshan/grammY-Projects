@@ -42,5 +42,46 @@ set_for_admin = ✅ RuleKeeper is now an admin in this group!
 welcome_successful = 🎉 The welcome message has been successfully updated!
      New members will now see your custom message when they join the group.
 
+
 welcome_unsuccessful = ⚠️ Failed to set the welcome message.
      Please make sure your message isn’t empty or too long, and try again.
+
+
+
+info = 📘 *RuleKeeper Information*
+
+   RuleKeeper is a powerful Telegram bot designed to help you manage and protect your groups with ease.
+
+   ⚙️ *Main Features:*
+   • Auto-welcome & farewell messages  
+   • Anti-spam and flood protection  
+   • Rule enforcement system  
+   • Admin activity logs  
+   • Multi-language support  
+
+   👑 *Bot Info:*
+      • Version: 10.0  
+      • Developer: thedshxn  
+      • Framework: grammY.js  
+
+    💡 Use /help to see all available commands
+
+rules_successful = ✅ Rules have been successfully updated!
+
+     📜 Use /rules anytime to view the current group rules.
+
+rules_unsuccessful = ❌ Failed to update the rules.
+
+     Please make sure your message isn't empty or try again later.
+
+show_rules = 📜 *Group Rules*
+
+    { $rules }
+
+    ⚠️ Violating these rules may result in warnings or removal from the group.
+
+    🕹 Managed by *RuleKeeper Bot*  
+    Use /se_rules to update these rules.
+
+rules_notfound = Use /se_rules to update these rules.
+
