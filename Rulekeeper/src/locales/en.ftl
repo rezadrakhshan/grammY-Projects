@@ -85,3 +85,15 @@ show_rules = 📜 *Group Rules*
 
 rules_notfound = Use /se_rules to update these rules.
 
+
+just_group = ⚠️ This command can only be used inside a group chat.
+
+     Please add me to your group or use this command there.
+
+
+only_admin = 🚫 You must be an admin to use this command.
+
+   Only group admins can change settings or manage rules.
+
+
+

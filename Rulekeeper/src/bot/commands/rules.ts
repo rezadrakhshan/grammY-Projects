@@ -1,8 +1,11 @@
 import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
+import { isAdmin } from "../../guards/admin.js";
 
 export const rules = new Composer<MyContext>();
+
+rules.use(isAdmin);
 
 rules.command("set_rules", async (ctx) => {
   const rules = ctx.match;

@@ -2,8 +2,11 @@ import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
 import { User } from "../../database/models/user.js";
+import { isAdmin } from "../../guards/admin.js";
 
 export const welcome = new Composer<MyContext>();
+
+welcome.use(isAdmin);
 
 welcome.command("set_welcome", async (ctx) => {
   const message = ctx.match;
