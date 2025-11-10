@@ -60,6 +60,17 @@ info = 📘 *RuleKeeper Information*
    • Multi-language support  
 
    👑 *Bot Info:*
+🚫 Bad Word Filter - Current List
+
+Total words: 5
+
+1️⃣ reza
+2️⃣ ali
+3️⃣ spam
+4️⃣ test
+5️⃣ mmd
+
+Use /removeFilter <word> to remove any word from this list.
       • Version: 10.0  
       • Developer: thedshxn  
       • Framework: grammY.js  
@@ -107,3 +118,36 @@ settings =
 spam = 
 	.enable = 🛡️ Anti-Spam has been enabled!
 	.disable = ⚠️ Anti-Spam has been disabled.
+
+
+
+filter_words =
+    .text = 🚫 *Bad Word Filter*
+
+        Enable this feature to automatically detect and delete messages that contain offensive or inappropriate words.
+        Group admins can manage their own custom word list using simple commands.
+
+        🧩 *Commands:*
+
+        • /addFilter — Adds a new word to the group’s bad word list.  
+        • /removeFilter — Removes a specific word from the bad word list.  
+        • /filterList — Shows the current list of all filtered (banned) words in this group.  
+        • /clearFilter — Deletes all words from the group’s bad word list.
+
+        💡 *Example:*  
+        /addFilter f,shit  
+        /removeFilter fuck
+
+    .add = ✅ Word Added Successfully!
+    .removed = ✅ Word Removed Successfully!
+    .clear = ✅ Bad Word List Cleared Successfully!
+    .list = 🚫 *Bad Word Filter - Current List*
+
+        Total words: { $count }
+
+        { $words }
+
+        Use /removeFilter <word> to remove any word from this list.
+
+
+
