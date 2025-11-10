@@ -96,4 +96,14 @@ only_admin = 🚫 You must be an admin to use this command.
    Only group admins can change settings or manage rules.
 
 
+settings = 
+	.text = Here you can manage RuleKeeper’s group protection features.
+           Toggle each option below to customize how your group is protected.
+	.option1 = 🛡️ Anti-Spam
+	.option2 = 🚫 Bad Words Filter
+	.option3 = 🔗 Link Filter
+	.option4 = 📤 Forward Filter
 
+spam = 
+	.enable = 🛡️ Anti-Spam has been enabled!
+	.disable = ⚠️ Anti-Spam has been disabled.
