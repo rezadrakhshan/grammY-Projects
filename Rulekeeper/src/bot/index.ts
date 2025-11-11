@@ -7,6 +7,7 @@ import { info } from "./commands/info.js";
 import { rules } from "./commands/rules.js";
 import { filter } from "./commands/filter.js";
 import { message } from "./group/message.js";
+import { warning } from "./commands/warning.js";
 
 export const mainComposer = new Composer<MyContext>();
 
@@ -16,4 +17,5 @@ mainComposer.use(welcome);
 mainComposer.use(info);
 mainComposer.use(rules);
 mainComposer.use(filter);
+mainComposer.use(warning);
 mainComposer.use(message);
