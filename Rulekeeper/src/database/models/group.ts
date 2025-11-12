@@ -13,6 +13,7 @@ const groupSchema = new mongoose.Schema(
       badWords: { type: [String] },
     },
     adminIDs: { type: [Number] },
+    maxWarningCount: { type: Number, default: 0 },
   },
   { timestamps: true },
 );
