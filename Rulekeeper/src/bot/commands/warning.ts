@@ -78,3 +78,16 @@ warning.command("add_warning", async (ctx) => {
     await ctx.reply(ctx.t("warning.error"));
   }
 });
+
+warning.command("set_max", async (ctx) => {
+  const max = Number(ctx.match);
+
+  const group = await Group.findOne({ chatID: ctx.chat.id });
+  if (!isNaN(max) && max > 0 && group) {
+    group.maxWarningCount = max;
+    await group.save();
+    await ctx.reply(ctx.t("set_max.success", { count: max }));
+  } else {
+    await ctx.reply(ctx.t("set_max.error"));
+  }
+});

@@ -160,3 +160,7 @@ warning =
 	.error = ❌ An error occurred while issuing a warning.
 
 
+set_max = 
+	.success = ✅ Warning limit successfully set to { $count }.
+	.error = ⚠️ Failed to set warning limit. Please try again or check your input
+
