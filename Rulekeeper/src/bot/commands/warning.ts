@@ -8,7 +8,7 @@ export const warning = new Composer<MyContext>();
 
 warning.use(isAdmin);
 
-warning.command("add_warning", async (ctx) => {
+warning.command("warn", async (ctx) => {
   try {
     const chat = ctx.chat?.id;
     const user = ctx.message?.reply_to_message?.from?.id;
@@ -89,5 +89,22 @@ warning.command("set_max", async (ctx) => {
     await ctx.reply(ctx.t("set_max.success", { count: max }));
   } else {
     await ctx.reply(ctx.t("set_max.error"));
+  }
+});
+
+warning.command("unwarn", async (ctx) => {
+  const chat = ctx.chat.id;
+  const user = ctx.message?.reply_to_message?.from?.id;
+  if (!user) {
+    await ctx.reply(ctx.t("warning.reply_required"));
+    return;
+  }
+  const target = await Warning.findOne({ chatID: chat, userID: user });
+  if (target && target.count > 0) {
+    target.count = target.count - 1;
+    await target.save();
+    await ctx.reply(ctx.t("unwarn.success", { count: target.count }));
+  } else {
+    await ctx.reply(ctx.t("unwarn.error"));
   }
 });

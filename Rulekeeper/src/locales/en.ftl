@@ -164,3 +164,7 @@ set_max =
 	.success = ✅ Warning limit successfully set to { $count }.
 	.error = ⚠️ Failed to set warning limit. Please try again or check your input
 
+
+unwarn =
+	.success = ✅ One warning has been removed from the user. Remaining warnings: { $count }.
+	.error = ℹ️ This user has no active warnings to remove.
