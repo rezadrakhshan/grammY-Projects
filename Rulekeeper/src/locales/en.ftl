@@ -151,11 +151,12 @@ filter_words =
 
 
 
-warning.reply_required = ❗️You must reply to a user's message to issue a warning.
-warning.group_not_found = ⚠️ Group settings not found.
-warning.received = ⚠️ The user has received warning {current} of {max}.
-warning.first_warning = ⚠️ The user has received their first warning ({current}/{max}).
-warning.muted = 🔇 The user has been muted due to exceeding the warning limit.
-warning.error = ❌ An error occurred while issuing a warning.
+warning = 
+	.reply_required = ❗️You must reply to a user's message to issue a warning.
+	.group_not_found = ⚠️ Group settings not found.
+	.received = ⚠️ The user has received warni { $current } of { $max }.
+	.first_warning = ⚠️ The user has received their first warnin{ $current }/{ $max }).
+	.muted = 🔇 The user has been muted due to exceeding the warning limit.
+	.error = ❌ An error occurred while issuing a warning.
 
 
