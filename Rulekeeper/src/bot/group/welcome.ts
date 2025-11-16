@@ -3,6 +3,7 @@ import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
 import { User } from "../../database/models/user.js";
 import { isAdmin } from "../../guards/admin.js";
+import { Warning } from "../../database/models/userWarning.js";
 
 export const welcome = new Composer<MyContext>();
 
@@ -53,5 +54,6 @@ welcome.on("message:left_chat_member", async (ctx) => {
   if (user) {
     user.groups = user.groups.filter((item) => item !== chat);
     await user.save();
+    await Warning.findOneAndDelete({ chatID: chat, userID: member });
   }
 });
