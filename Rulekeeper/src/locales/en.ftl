@@ -168,3 +168,12 @@ set_max =
 unwarn =
 	.success = ✅ One warning has been removed from the user. Remaining warnings: { $count }.
 	.error = ℹ️ This user has no active warnings to remove.
+
+
+mute = 
+	.past = ⛔️ The timestamp is already in the past. 
+	.invalid = ❗️Invalid input.
+	.format1 = { $days } day(s), { $hours } hour(s), { $minutes } minute(s).
+	.format2 = { $hours } hour(s), { $minutes } minute(s)
+	.format3 = { $minutes } minute(s)
+	.result = 📅 *Mute until:* { $until }\n⏳ *Remaining:* { $remaining }
