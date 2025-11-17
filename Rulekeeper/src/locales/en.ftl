@@ -177,3 +177,7 @@ mute =
 	.format2 = { $hours } hour(s), { $minutes } minute(s)
 	.format3 = { $minutes } minute(s)
 	.result = 📅 *Mute until:* { $until }\n⏳ *Remaining:* { $remaining }
+
+
+unmute = You're back in the conversation! Feel free to join in 🎉
+isUnmute = Looks like they’re already part of the conversation 😊

@@ -95,3 +95,37 @@ punish.command("mute", async (ctx) => {
     },
   );
 });
+
+punish.command("unmute", async (ctx) => {
+  const user = ctx.message?.reply_to_message?.from?.id as number;
+  const chat = ctx.chat.id;
+  if (!user) {
+    await ctx.reply(ctx.t("warning.reply_required"));
+    return;
+  }
+  const getUser = await ctx.api.getChatMember(chat, user);
+  if (getUser.status === "restricted") {
+    const isMuted = getUser.can_send_messages;
+    if (isMuted) {
+      await ctx.reply(ctx.t("isUnmute"), {
+        reply_to_message_id: ctx.message?.reply_to_message
+          ?.message_id as number,
+      });
+      return;
+    }
+  }
+  await ctx.api.restrictChatMember(chat, user, {
+    can_send_voice_notes: true,
+    can_send_videos: true,
+    can_send_video_notes: true,
+    can_send_polls: true,
+    can_send_photos: true,
+    can_send_other_messages: true,
+    can_send_messages: true,
+    can_send_documents: true,
+    can_send_audios: true,
+  });
+  await ctx.reply(ctx.t("unmute"), {
+    reply_to_message_id: ctx.message?.reply_to_message?.message_id as number,
+  });
+});
