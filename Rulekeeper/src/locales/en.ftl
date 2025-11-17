@@ -180,4 +180,9 @@ mute =
 
 
 unmute = You're back in the conversation! Feel free to join in 🎉
-isUnmute = Looks like they’re already part of the conversation 😊
+isUnmute = Looks like they’re already part of the conversation 
+ban = 🚷 User has been sent on a little vacation from the group. Let's keep things chill here😊
+
+unban = 
+	.text = 🎉 Welcome back! The user is no longer banned and free to participate again.
+	.notFound = 🤔 Hmm… I couldn’t find that user. Please check the username or ID and try again.

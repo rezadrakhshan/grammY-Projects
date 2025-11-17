@@ -1,6 +1,8 @@
 import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { isAdmin } from "../../guards/admin.js";
+import { User } from "../../database/models/user.js";
+import { Group } from "../../database/models/group.js";
 
 export const punish = new Composer<MyContext>();
 
@@ -128,4 +130,29 @@ punish.command("unmute", async (ctx) => {
   await ctx.reply(ctx.t("unmute"), {
     reply_to_message_id: ctx.message?.reply_to_message?.message_id as number,
   });
+});
+
+punish.command("ban", async (ctx) => {
+  const user = ctx.message?.reply_to_message?.from?.id;
+  const chat = ctx.chat.id;
+  if (!user) {
+    await ctx.reply("warning.reply_required");
+    return;
+  }
+  await ctx.api.banChatMember(chat, user);
+  await ctx.reply(ctx.t("ban"), {
+    reply_to_message_id: ctx.message?.reply_to_message?.message_id as number,
+  });
+});
+
+punish.command("unban", async (ctx) => {
+  const username = ctx.match.trim().split("@")[1];
+  const chat = ctx.chat.id;
+  const user = await User.findOne({ username: username });
+  if (!user) {
+    await ctx.reply(ctx.t("unban.notFound"));
+    return;
+  }
+  await ctx.api.unbanChatMember(chat, user?.userID as number);
+  await ctx.reply(ctx.t("unban.text"));
 });
