@@ -1,10 +1,11 @@
 import { askAI } from "../helper/ask.js";
 import { type MyContext } from "../index.js";
-import { escapeMarkdown } from "../helper/text_format.js";
+import { markdownToHtml } from "../helper/text_format.js";
 
 export async function answerAI(ctx: MyContext) {
   const waiter = await ctx.reply("⏳");
   const response = await askAI(ctx.message?.text as string, ctx);
+  const htmlResult = markdownToHtml(response);
   await ctx.api.deleteMessage(ctx.chat?.id as number, waiter.message_id);
-  await ctx.reply(escapeMarkdown(response), { parse_mode: "MarkdownV2" });
+  await ctx.reply(htmlResult, { parse_mode: "HTML" });
 }
