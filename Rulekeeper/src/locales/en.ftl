@@ -115,11 +115,6 @@ settings =
 	.option3 = 🔗 Link Filter
 	.option4 = 📤 Forward Filter
 
-spam = 
-	.enable = 🛡️ Anti-Spam has been enabled!
-	.disable = ⚠️ Anti-Spam has been disabled.
-
-
 
 filter_words =
     .text = 🚫 *Bad Word Filter*
@@ -186,3 +181,8 @@ ban = 🚷 User has been sent on a little vacation from the group. Let's keep th
 unban = 
 	.text = 🎉 Welcome back! The user is no longer banned and free to participate again.
 	.notFound = 🤔 Hmm… I couldn’t find that user. Please check the username or ID and try again.
+
+anti-spam-on = 🛡️ Spam Shield Activated!
+anti-spam-off = 😴 Spam Shield Snoozing
+
+spam-mute = 🚫 You are being spamming! Please wait before sending more messages.
