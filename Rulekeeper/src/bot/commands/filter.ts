@@ -19,10 +19,10 @@ filter.callbackQuery("spam", async (ctx) => {
   if (!chat || !chat.antiSpam) return;
   if (chat.antiSpam.enabled) {
     chat.antiSpam.enabled = false;
-    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-on") });
+    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-off") });
   } else {
     chat.antiSpam.enabled = true;
-    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-off") });
+    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-on") });
   }
   await chat.save();
 });

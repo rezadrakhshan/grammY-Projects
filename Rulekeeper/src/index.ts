@@ -9,6 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { connectMongo } from "./database/mongo.js";
 import { mainComposer } from "./bot/index.js";
+import { spamMap, TIME_FRAME } from "./bot/group/message.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -27,5 +28,14 @@ bot.use(session({ initial }));
 bot.use(i18n);
 
 bot.use(mainComposer);
+
+setInterval(() => {
+  const now = Date.now();
+  spamMap.forEach((info, userID) => {
+    if (now - info.firstMessage > TIME_FRAME) {
+      spamMap.delete(userID);
+    }
+  });
+}, 60000);
 
 bot.start();

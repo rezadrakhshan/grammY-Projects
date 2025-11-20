@@ -3,9 +3,9 @@ import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
 
 export const message = new Composer<MyContext>();
-const spamMap = new Map();
+export const spamMap = new Map();
 const SPAM_LIMIT = 5;
-const TIME_FRAME = 10000;
+export const TIME_FRAME = 10000;
 
 message.on("message:text", async (ctx) => {
   const text = ctx.message.text.toLowerCase();
@@ -38,7 +38,11 @@ message.on("message:text", async (ctx) => {
         can_send_videos: false,
         can_send_voice_notes: false,
       });
-      await ctx.reply(ctx.t("spam-mute"));
+      await ctx.reply(
+        ctx.t("spam-mute", {
+          user: ctx.from.username as string,
+        }),
+      );
       await ctx.deleteMessage();
     }
   }
