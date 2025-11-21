@@ -10,6 +10,7 @@ const groupSchema = new mongoose.Schema(
       enabled: { type: Boolean, default: false },
       floodLimit: { type: Number, default: 0 },
       linkBlock: { type: Boolean, default: false },
+      forwardBlock: { type: Boolean, default: false },
       badWords: { type: [String] },
     },
     adminIDs: { type: [Number] },

@@ -99,3 +99,16 @@ filter.callbackQuery("link", async (ctx) => {
   }
   await group?.save();
 });
+
+filter.callbackQuery("forward", async (ctx) => {
+  const group: any = await Group.findOne({ chatID: ctx.chat?.id });
+  if (!group) return;
+  else if (group.antiSpam?.forwardBlock) {
+    group.antiSpam.forwardBlock = false;
+    await ctx.answerCallbackQuery({ text: ctx.t("forward-block.off") });
+  } else {
+    group.antiSpam.forwardBlock = true;
+    await ctx.answerCallbackQuery({ text: ctx.t("forward-block.on") });
+  }
+  await group.save();
+});

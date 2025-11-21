@@ -190,3 +190,7 @@ spam-mute 🚫 @{ $user }, You are being spamming! Please wait before sending mo
 link-block = 
 	.off = ✅ Link blocking has been turned off! 
 	.on = 🚫 Link blocking is now active!
+
+forward-block = 
+	.on = 🚫 Forwarded messages are now blocked!  
+	.off = ✅ Forwarded messages are allowed again!
