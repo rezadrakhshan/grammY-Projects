@@ -87,3 +87,15 @@ filter.command("filterList", async (ctx) => {
     { parse_mode: "Markdown" },
   );
 });
+
+filter.callbackQuery("link", async (ctx) => {
+  const group: any = await Group.findOne({ chatID: ctx.chat?.id });
+  if (group?.antiSpam?.linkBlock) {
+    group.antiSpam.linkBlock = false;
+    await ctx.answerCallbackQuery({ text: ctx.t("link-block.off") });
+  } else {
+    group.antiSpam.linkBlock = true;
+    await ctx.answerCallbackQuery({ text: ctx.t("link-block.on") });
+  }
+  await group?.save();
+});

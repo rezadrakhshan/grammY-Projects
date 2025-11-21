@@ -186,3 +186,7 @@ anti-spam-on = 🛡️ Spam Shield Activated!
 anti-spam-off = 😴 Spam Shield Snoozing
 
 spam-mute 🚫 @{ $user }, You are being spamming! Please wait before sending more messages.
+
+link-block = 
+	.off = ✅ Link blocking has been turned off! 
+	.on = 🚫 Link blocking is now active!
