@@ -194,3 +194,8 @@ link-block =
 forward-block = 
 	.on = 🚫 Forwarded messages are now blocked!  
 	.off = ✅ Forwarded messages are allowed again!
+
+leaderboard = 
+	.header = 🌟 Hey friends, here’s our chat leaderboard!
+	.footer = Keep the good vibes rolling 💕 — who’s climbing up next week? 🚀
+	.message = messages
