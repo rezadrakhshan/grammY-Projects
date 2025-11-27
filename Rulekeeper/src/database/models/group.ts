@@ -15,7 +15,7 @@ const groupSchema = new mongoose.Schema(
     },
     AIAsistantt: { type: Boolean, default: false },
     adminIDs: { type: [Number] },
-    maxWarningCount: { type: Number, default: 0 },
+    maxWarningCount: { type: Number, default: 3 },
   },
   { timestamps: true },
 );

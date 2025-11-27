@@ -2,7 +2,6 @@ import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { isAdmin } from "../../guards/admin.js";
 import { User } from "../../database/models/user.js";
-import { Group } from "../../database/models/group.js";
 
 export const punish = new Composer<MyContext>();
 

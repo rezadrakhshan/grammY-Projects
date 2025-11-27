@@ -39,3 +39,7 @@ setInterval(() => {
 }, 60000);
 
 bot.start();
+
+bot.catch((err) => {
+  console.log(err.message);
+});

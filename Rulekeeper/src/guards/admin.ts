@@ -26,6 +26,5 @@ export async function isAdmin(ctx: MyContext, next: NextFunction) {
     await next();
   } catch (err) {
     console.error(err);
-    await ctx.reply("An error occurred while checking admin status.");
   }
 }

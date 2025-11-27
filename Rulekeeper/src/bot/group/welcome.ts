@@ -25,7 +25,7 @@ welcome.on("message:new_chat_members", async (ctx) => {
   const members = ctx.message.new_chat_members;
   const group = await Group.findOne({ chatID: ctx.chat.id });
   if (!group) return;
-  if (group.welcomeMessage !== "") {
+  if (group.welcomeMessage) {
     for (const member of members) {
       if (member.is_bot) return;
       const check = await User.findOne({ userID: member.id });
@@ -48,12 +48,16 @@ welcome.on("message:new_chat_members", async (ctx) => {
 });
 
 welcome.on("message:left_chat_member", async (ctx) => {
-  const member = ctx.message.left_chat_member;
-  const chat = ctx.chat.id;
-  let user = await User.findOne({ userID: member.id });
-  if (user) {
-    user.groups = user.groups.filter((item) => item !== chat);
-    await user.save();
-    await Warning.findOneAndDelete({ chatID: chat, userID: member });
+  try {
+    const member = ctx.message.left_chat_member;
+    const chat = ctx.chat.id;
+    let user = await User.findOne({ userID: member.id });
+    if (user) {
+      user.groups = user.groups.filter((item) => item !== chat);
+      await user.save();
+      await Warning.findOneAndDelete({ chatID: chat, userID: member });
+    }
+  } catch {
+    console.log("Bot got error when user left the group");
   }
 });
