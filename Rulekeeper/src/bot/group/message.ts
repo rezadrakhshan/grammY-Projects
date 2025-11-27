@@ -3,6 +3,7 @@ import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
 import { filterLink } from "../../helper/link-filter.js";
 import { messageCounter } from "../../helper/message-counter.js";
+import { aiGuard } from "../../guards/ai.js";
 
 export const message = new Composer<MyContext>();
 export const spamMap = new Map();
@@ -49,6 +50,7 @@ message.on("message:text", async (ctx) => {
       await ctx.deleteMessage();
     }
   }
+  if (group.rules) await aiGuard(ctx);
   await messageCounter(ctx);
 });
 

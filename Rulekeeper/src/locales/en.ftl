@@ -21,7 +21,6 @@ new_text = ⚠️ Important!
     • It can manage messages and chat info
 
     Once done, you’re all set! 🎉
-
 bot_removed= ⚠️ Attention
 
     RuleKeeper has been removed from the group:
@@ -113,7 +112,8 @@ settings =
 	.option1 = 🛡️ Anti-Spam
 	.option2 = 🚫 Bad Words Filter
 	.option3 = 🔗 Link Filter
-	.option4 = 📤 Forward Filter
+	.option4 = 📤 Forward ter
+	.ai = 👾 AI Assistant 
 
 
 filter_words =
@@ -199,3 +199,7 @@ leaderboard =
 	.header = 🌟 Hey friends, here’s our chat leaderboard!
 	.footer = Keep the good vibes rolling 💕 — who’s climbing up next week? 🚀
 	.message = messages
+
+ai = 
+	.inActive = AI Assistant is currently inactive 💤
+	.active = AI Assistant is now active 🎉

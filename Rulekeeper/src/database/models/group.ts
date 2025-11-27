@@ -13,6 +13,7 @@ const groupSchema = new mongoose.Schema(
       forwardBlock: { type: Boolean, default: false },
       badWords: { type: [String] },
     },
+    AIAsistantt: { type: Boolean, default: false },
     adminIDs: { type: [Number] },
     maxWarningCount: { type: Number, default: 0 },
   },

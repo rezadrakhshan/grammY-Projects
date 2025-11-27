@@ -10,6 +10,7 @@ import { message } from "./group/message.js";
 import { warning } from "./commands/warning.js";
 import { punish } from "./commands/punish.js";
 import { leaderboard } from "./commands/leaderboard.js";
+import { ai } from "./commands/ai.js";
 
 export const mainComposer = new Composer<MyContext>();
 
@@ -22,4 +23,5 @@ mainComposer.use(filter);
 mainComposer.use(warning);
 mainComposer.use(punish);
 mainComposer.use(leaderboard);
+mainComposer.use(ai);
 mainComposer.use(message);
