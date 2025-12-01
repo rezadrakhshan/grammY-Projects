@@ -1,88 +1,83 @@
-start = 👋 Hello! I'm RuleKeeper — your smart Telegram group management assistant.
+start = 👋 Hi there! I’m RuleKeeper — your friendly helper for managing Telegram groups.
 
-    I can help you:
-    • Manage group rules  
-    • Welcome new members  
-    • Prevent spam and unwanted links  
-    • And keep everything clean & organized!
+    Here’s what I can do for you:
+    • Keep group rules clear & easy to follow  
+    • Greet new members with a warm welcome  
+    • Stop spam and unwanted links 🚫  
+    • Keep your group clean, safe & organized ✨  
 
-     Add me to your group to get started 👇
+    👉 Add me to your group and let’s make it awesome together!
 
 button = 
 	.addGroup = ➕ Add me to your group
 
-new_text = ⚠️ Important!
+new_text = ⚠️ Heads up!
 
-    To manage this group properly, RuleKeeper needs *full admin permissions*.
-    Please make sure:
-    • RuleKeeper is promoted to Admin
-    • It can delete messages
-    • It can restrict and pin members
-    • It can manage messages and chat info
+    To keep your group running smoothly, RuleKeeper needs full admin powers.  
+    Please check that:  
+    • RuleKeeper is promoted to Admin  
+    • It can delete unwanted messages  
+    • It can restrict or pin members  
+    • It can manage chat info and messages  
 
-    Once done, you’re all set! 🎉
+    ✅ Once that’s done, you’re all set — enjoy a cleaner, safer group! 🎉
+
 bot_removed= ⚠️ Attention
 
-    RuleKeeper has been removed from the group:
-    Group Name: { $group_title }
-    Group ID: { $group_id }
+    RuleKeeper has been removed from this group:
+    • Group Name: { $group_title }
+    • Group ID: { $group_id }
 
-    All settings and group data for this group have been deleted from the database.
+    All settings and data linked to this group have been cleared from the database.
 
-    If this was a mistake, you can add RuleKeeper back to the group at any time using the invitation link.
+    👉 If this happened by mistake, no worries! You can add RuleKeeper back anytime using the group’s invitation link.
 
-set_for_admin = ✅ RuleKeeper is now an admin in this group!
+set_for_admin = ✅ RuleKeeper is now an admin here!
 
-    Thank you for granting admin access.  
-    Now I can help you manage the group — remove spam, enforce rules, welcome new members, and keep everything organized!
+    Thanks for giving me admin access 🙌  
+    I can now help keep your group safe and organized:  
+    • Remove spam 🚫  
+    • Enforce rules 📜  
+    • Welcome new members 👋  
+    • Keep everything tidy ✨  
 
-    Use /settings to configure features and customize RuleKeeper’s behavior.
-
-welcome_successful = 🎉 The welcome message has been successfully updated!
-     New members will now see your custom message when they join the group.
-
-
-welcome_unsuccessful = ⚠️ Failed to set the welcome message.
-     Please make sure your message isn’t empty or too long, and try again.
+    ⚙️ Use /settings anytime to customize how RuleKeeper works for your group.
 
 
+welcome_successful = 🎉 Success!
 
-info = 📘 *RuleKeeper Information*
+    Your welcome message has been updated.  
+    New members will now see your custom greeting when they join the group 👋
 
-   RuleKeeper is a powerful Telegram bot designed to help you manage and protect your groups with ease.
 
-   ⚙️ *Main Features:*
-   • Auto-welcome & farewell messages  
-   • Anti-spam and flood protection  
-   • Rule enforcement system  
-   • Admin activity logs  
-   • Multi-language support  
+welcome_unsuccessful = ⚠️ Oops!  
 
-   👑 *Bot Info:*
-🚫 Bad Word Filter - Current List
+    I couldn’t update the welcome message.  
+    Please check that your message isn’t empty or too long, then try again ✨
 
-Total words: 5
 
-1️⃣ reza
-2️⃣ ali
-3️⃣ spam
-4️⃣ test
-5️⃣ mmd
 
-Use /removeFilter <word> to remove any word from this list.
-      • Version: 10.0  
-      • Developer: thedshxn  
-      • Framework: grammY.js  
+info = 📘 *About RuleKeeper*
 
-    💡 Use /help to see all available commands
+    RuleKeeper is your smart Telegram assistant — built to make group management simple and stress‑free.  
 
-rules_successful = ✅ Rules have been successfully updated!
+    ⚙️ *Key Features:*  
+    • Friendly auto‑welcome & farewell messages 👋  
+    • Strong anti‑spam & flood protection 🚫  
+    • Easy rule enforcement system 📜  
+    • Helpful admin activity logs 📝  
+    • Multi‑language support 🌍  
 
-     📜 Use /rules anytime to view the current group rules.
+    ✨ Add RuleKeeper to your group and enjoy a cleaner, safer community!
 
-rules_unsuccessful = ❌ Failed to update the rules.
+rules_successful = ✅ Rules updated successfully!
 
-     Please make sure your message isn't empty or try again later.
+    📜 Use /rules anytime to check the latest group rules.
+
+rules_unsuccessful = ❌ Oops!  
+
+    I couldn’t update the rules.  
+    Please check that your message isn’t empty, then try again later ✨
 
 show_rules = 📜 *Group Rules*
 
@@ -91,24 +86,28 @@ show_rules = 📜 *Group Rules*
     ⚠️ Violating these rules may result in warnings or removal from the group.
 
     🕹 Managed by *RuleKeeper Bot*  
-    Use /se_rules to update these rules.
+    Use /set_rules to update these rules.
 
-rules_notfound = Use /se_rules to update these rules.
-
-
-just_group = ⚠️ This command can only be used inside a group chat.
-
-     Please add me to your group or use this command there.
+rules_notfound = Use /set_rules to update these rules.
 
 
-only_admin = 🚫 You must be an admin to use this command.
+just_group = ⚠️ Heads up!
 
-   Only group admins can change settings or manage rules.
+    This command only works inside a group chat.  
+    👉 Please add me to your group or run this command there.
+
+
+only_admin = 🚫 Hold on!
+
+    This command is only for group admins.  
+    👑 Admins can change settings and manage rules.
 
 
 settings = 
-	.text = Here you can manage RuleKeeper’s group protection features.
-           Toggle each option below to customize how your group is protected.
+	.text =🛡️ Group Protection Settings
+
+        Here you can manage RuleKeeper’s protection features.  
+        Toggle the options below to customize how your group stays safe and organized ✨
 	.option1 = 🛡️ Anti-Spam
 	.option2 = 🚫 Bad Words Filter
 	.option3 = 🔗 Link Filter
@@ -119,23 +118,22 @@ settings =
 filter_words =
     .text = 🚫 *Bad Word Filter*
 
-        Enable this feature to automatically detect and delete messages that contain offensive or inappropriate words.
-        Group admins can manage their own custom word list using simple commands.
+        Turn this on to automatically catch and delete messages with offensive or inappropriate words.  
+        Group admins can easily manage their own custom word list using simple commands.  
 
-        🧩 *Commands:*
-
-        • /addFilter — Adds a new word to the group’s bad word list.  
-        • /removeFilter — Removes a specific word from the bad word list.  
-        • /filterList — Shows the current list of all filtered (banned) words in this group.  
-        • /clearFilter — Deletes all words from the group’s bad word list.
+        🧩 *Commands:*  
+        • /addFilter — Add a new word to the bad word list  
+        • /removeFilter — Remove a specific word from the list  
+        • /filterList — Show all currently filtered (banned) words  
+        • /clearFilter — Delete all words from the bad word list  
 
         💡 *Example:*  
-        /addFilter f,shit  
-        /removeFilter fuck
+        /addFilter test,badword  
+        /removeFilter badword
 
-    .add = ✅ Word Added Successfully!
-    .removed = ✅ Word Removed Successfully!
-    .clear = ✅ Bad Word List Cleared Successfully!
+    .add = ✅ Done! The word has been added.
+    .removed = ✅ Done! The word has been removed.
+    .clear = ✅ All set! The bad word list is now empty.
     .list = 🚫 *Bad Word Filter - Current List*
 
         Total words: { $count }
@@ -147,40 +145,39 @@ filter_words =
 
 
 warning = 
-	.reply_required = ❗️You must reply to a user's message to issue a warning.
-	.group_not_found = ⚠️ Group settings not found.
-	.received = ⚠️ The user has received warni { $current } of { $max }.
-	.first_warning = ⚠️ The user has received their first warnin{ $current }/{ $max }).
-	.muted = 🔇 The user has been muted due to exceeding the warning limit.
-	.error = ❌ An error occurred while issuing a warning.
+    .reply_required = ❗️ You must reply to a user's message to issue a warning.
+    .group_not_found = ⚠️ Group settings not found.
+    .received = ⚠️ The user has received warning { $current } of { $max }.
+    .first_warning = ⚠️ The user has received their first warning ({ $current }/{ $max }).
+    .muted = 🔇 The user has been muted after exceeding the warning limit.
+    .error = ❌ An error occurred while issuing the warning.
 
 
 set_max = 
-	.success = ✅ Warning limit successfully set to { $count }.
-	.error = ⚠️ Failed to set warning limit. Please try again or check your input
+    .success = ✅ Warning limit set successfully to { $count }.
+    .error = ⚠️ Failed to set warning limit. Please check your input and try again.
 
 
 unwarn =
-	.success = ✅ One warning has been removed from the user. Remaining warnings: { $count }.
-	.error = ℹ️ This user has no active warnings to remove.
+    .success = ✅ One warning removed from the user. Remaining warnings: { $count }.
+    .error = ℹ️ This user has no active warnings to remove.
 
 
 mute = 
-	.past = ⛔️ The timestamp is already in the past. 
-	.invalid = ❗️Invalid input.
-	.format1 = { $days } day(s), { $hours } hour(s), { $minutes } minute(s).
-	.format2 = { $hours } hour(s), { $minutes } minute(s)
-	.format3 = { $minutes } minute(s)
-	.result = 📅 *Mute until:* { $until }\n⏳ *Remaining:* { $remaining }
+    .past = ⛔️ The timestamp is already in the past.
+    .invalid = ❗️ Invalid input.
+    .format1 = { $days } day(s), { $hours } hour(s), { $minutes } minute(s).
+    .format2 = { $hours } hour(s), { $minutes } minute(s).
+    .format3 = { $minutes } minute(s).
+    .result = 📅 *Mute until:* { $until }\n⏳ *Remaining:* { $remaining }
 
-
-unmute = You're back in the conversation! Feel free to join in 🎉
-isUnmute = Looks like they’re already part of the conversation 
-ban = 🚷 User has been sent on a little vacation from the group. Let's keep things chill here😊
+unmute = ✅ You’re back in the conversation! Feel free to join in 🎉
+isUnmute = ℹ️ Looks like this user is already part of the conversation.
+ban = 🚷 User has been removed from the group. Let’s keep things chill here 😊
 
 unban = 
-	.text = 🎉 Welcome back! The user is no longer banned and free to participate again.
-	.notFound = 🤔 Hmm… I couldn’t find that user. Please check the username or ID and try again.
+    .text = 🎉 Welcome back! The user is no longer banned and can participate again.
+    .notFound = 🤔 Hmm… I couldn’t find that user. Please check the username or ID and try again.
 
 anti-spam-on = 🛡️ Spam Shield Activated!
 anti-spam-off = 😴 Spam Shield Snoozing
@@ -203,3 +200,9 @@ leaderboard =
 ai = 
 	.inActive = AI Assistant is currently inactive 💤
 	.active = AI Assistant is now active 🎉
+
+lang = 
+	.text = ✨ Please pick your preferred language below. I’ll make sure all messages feel natural to you.
+	.fa = 🇮🇷 فارسی
+	.en = 🇬🇧 English
+	.ru = 🇷🇺 Русский
