@@ -4,11 +4,16 @@ import { Group } from "../../database/models/group.js";
 import { filterLink } from "../../helper/link-filter.js";
 import { messageCounter } from "../../helper/message-counter.js";
 import { aiGuard } from "../../guards/ai.js";
+import { addUserToDB } from "../../helper/add_user_to_db.js";
 
 export const message = new Composer<MyContext>();
 export const spamMap = new Map();
 const SPAM_LIMIT = 5;
 export const TIME_FRAME = 10000;
+
+message.on("message", async (ctx) => {
+  await addUserToDB(ctx, ctx.from);
+});
 
 message.on("message:text", async (ctx) => {
   const text = ctx.message.text.toLowerCase();

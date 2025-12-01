@@ -7,6 +7,9 @@ export const index = new Composer<MyContext>();
 index.on("my_chat_member", async (ctx) => {
   const chat = ctx.chat;
 
+  const users = ctx.myChatMember.new_chat_member;
+  console.log(users);
+
   const status = ctx.myChatMember.new_chat_member.status;
   const oldStatus = ctx.myChatMember.old_chat_member.status;
   if (status === "kicked" || status === "left") {

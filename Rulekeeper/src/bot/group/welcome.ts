@@ -4,6 +4,7 @@ import { Group } from "../../database/models/group.js";
 import { User } from "../../database/models/user.js";
 import { isAdmin } from "../../guards/admin.js";
 import { Warning } from "../../database/models/userWarning.js";
+import { addUserToDB } from "../../helper/add_user_to_db.js";
 
 export const welcome = new Composer<MyContext>();
 
@@ -25,25 +26,11 @@ welcome.on("message:new_chat_members", async (ctx) => {
   const members = ctx.message.new_chat_members;
   const group = await Group.findOne({ chatID: ctx.chat.id });
   if (!group) return;
-  if (group.welcomeMessage) {
-    for (const member of members) {
-      if (member.is_bot) return;
-      const check = await User.findOne({ userID: member.id });
-      if (!check)
-        await User.create({
-          userID: member.id,
-          username: member.username,
-          firstName: member.first_name,
-          groups: [group.chatID],
-        });
-      else {
-        await User.findOneAndUpdate(
-          { userID: member.id },
-          { $push: { groups: group.chatID } },
-        );
-      }
+  for (const member of members) {
+    if (member.is_bot) return;
+    await addUserToDB(ctx, member);
+    if (group.welcomeMessage)
       await ctx.reply(`@${member.username} ${group.welcomeMessage}`);
-    }
   }
 });
 
