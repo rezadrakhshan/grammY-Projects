@@ -111,8 +111,18 @@ settings =
 	.option1 = 🛡️ Anti-Spam
 	.option2 = 🚫 Bad Words Filter
 	.option3 = 🔗 Link Filter
-	.option4 = 📤 Forward ter
+	.option4 = 📤 Forward Filter
 	.ai = 👾 AI Assistant 
+	,gif = 🖼️ Gif Filter
+	.edit = 💬 Edit Message
+	.video = 📽️ Video Filter
+	.pic = 📷 Picture Filter
+	.music = 🎵 Music Filter
+	.sticker = 🪽 Sticker Filter
+	.location = 🗺️ Location Filter
+	.voice = 🔊 Voice Filter
+	.poll = 📈 Poll Filter
+
 
 
 filter_words =
