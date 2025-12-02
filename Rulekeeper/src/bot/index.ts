@@ -12,6 +12,7 @@ import { punish } from "./commands/punish.js";
 import { leaderboard } from "./commands/leaderboard.js";
 import { ai } from "./commands/ai.js";
 import { language } from "./commands/lang.js";
+import { blockComposer } from "./blocks/block.js";
 
 export const mainComposer = new Composer<MyContext>();
 
@@ -26,4 +27,5 @@ mainComposer.use(punish);
 mainComposer.use(leaderboard);
 mainComposer.use(ai);
 mainComposer.use(language);
+mainComposer.use(blockComposer);
 mainComposer.use(message);
