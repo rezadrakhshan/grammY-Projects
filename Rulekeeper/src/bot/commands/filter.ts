@@ -3,6 +3,7 @@ import { type MyContext } from "../../index.js";
 import { settingMenu } from "../../keyboard/settings.js";
 import { isAdmin } from "../../guards/admin.js";
 import { Group } from "../../database/models/group.js";
+import type { Record } from "groq-sdk/core.mjs";
 
 export const filter = new Composer<MyContext>();
 
@@ -12,19 +13,6 @@ filter.command("settings", async (ctx) => {
   await ctx.reply(ctx.t("settings.text"), {
     reply_markup: await settingMenu(ctx),
   });
-});
-
-filter.callbackQuery("spam", async (ctx) => {
-  const chat = await Group.findOne({ chatID: ctx.chat?.id });
-  if (!chat || !chat.antiSpam) return;
-  if (chat.antiSpam.enabled) {
-    chat.antiSpam.enabled = false;
-    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-off") });
-  } else {
-    chat.antiSpam.enabled = true;
-    await ctx.answerCallbackQuery({ text: ctx.t("anti-spam-on") });
-  }
-  await chat.save();
 });
 
 filter.callbackQuery("bad-word", async (ctx) => {
@@ -88,27 +76,18 @@ filter.command("filterList", async (ctx) => {
   );
 });
 
-filter.callbackQuery("link", async (ctx) => {
-  const group: any = await Group.findOne({ chatID: ctx.chat?.id });
-  if (group?.antiSpam?.linkBlock) {
-    group.antiSpam.linkBlock = false;
-    await ctx.answerCallbackQuery({ text: ctx.t("link-block.off") });
-  } else {
-    group.antiSpam.linkBlock = true;
-    await ctx.answerCallbackQuery({ text: ctx.t("link-block.on") });
-  }
-  await group?.save();
-});
-
-filter.callbackQuery("forward", async (ctx) => {
-  const group: any = await Group.findOne({ chatID: ctx.chat?.id });
+filter.callbackQuery(/\b\w+:filter\b/, async (ctx) => {
+  const chat = ctx.chat?.id;
+  const group = await Group.findOne({ chatID: chat });
   if (!group) return;
-  else if (group.antiSpam?.forwardBlock) {
-    group.antiSpam.forwardBlock = false;
-    await ctx.answerCallbackQuery({ text: ctx.t("forward-block.off") });
-  } else {
-    group.antiSpam.forwardBlock = true;
-    await ctx.answerCallbackQuery({ text: ctx.t("forward-block.on") });
-  }
+  const antiSpam: any = group.antiSpam;
+  const callBackData: any = ctx.callbackQuery.data.split(":");
+
+  antiSpam[callBackData[0]] = !antiSpam[callBackData[0]];
+
+  group.antiSpam = antiSpam;
   await group.save();
+  await ctx.answerCallbackQuery({
+    text: antiSpam[callBackData[0]] ? ctx.t("active") : ctx.t("deactivate"),
+  });
 });

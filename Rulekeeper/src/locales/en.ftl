@@ -113,7 +113,7 @@ settings =
 	.option3 = 🔗 Link Filter
 	.option4 = 📤 Forward Filter
 	.ai = 👾 AI Assistant 
-	,gif = 🖼️ Gif Filter
+	.gif = 🖼️ Gif Filter
 	.edit = 💬 Edit Message
 	.video = 📽️ Video Filter
 	.pic = 📷 Picture Filter
@@ -216,3 +216,6 @@ lang =
 	.fa = 🇮🇷 فارسی
 	.en = 🇬🇧 English
 	.ru = 🇷🇺 Русский
+
+active = This feature is now active and ready to go.
+deactivate = This feature has been turned off. You can enable it again anytime.
