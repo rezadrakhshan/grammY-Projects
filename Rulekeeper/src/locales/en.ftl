@@ -155,7 +155,7 @@ filter_words =
 
 
 warning = 
-    .reply_required = ❗️ You must reply to a user's message to issue a warning.
+    .reply_required = ❗️ You must reply to a user's message.
     .group_not_found = ⚠️ Group settings not found.
     .received = ⚠️ The user has received warning { $current } of { $max }.
     .first_warning = ⚠️ The user has received their first warning ({ $current }/{ $max }).
@@ -219,3 +219,17 @@ lang =
 
 active = This feature is now active and ready to go.
 deactivate = This feature has been turned off. You can enable it again anytime.
+
+
+user_info = 
+	.text =  👤 <b>User Info</b>
+		 ID: {$id}
+		 Name: {$first_name} {$last_name}
+		 Username: @{$username}
+		 Premium: {$is_premium}
+
+		 Status: {$status}
+
+		 Photos: {$photo_total}
+ 
+
