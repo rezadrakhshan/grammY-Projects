@@ -13,6 +13,7 @@ import { leaderboard } from "./commands/leaderboard.js";
 import { ai } from "./commands/ai.js";
 import { language } from "./commands/lang.js";
 import { blockComposer } from "./blocks/block.js";
+import { help } from "./commands/help.js";
 
 export const mainComposer = new Composer<MyContext>();
 
@@ -28,4 +29,5 @@ mainComposer.use(leaderboard);
 mainComposer.use(ai);
 mainComposer.use(language);
 mainComposer.use(blockComposer);
+mainComposer.use(help);
 mainComposer.use(message);

@@ -3,7 +3,6 @@ import { type MyContext } from "../../index.js";
 import { settingMenu } from "../../keyboard/settings.js";
 import { isAdmin } from "../../guards/admin.js";
 import { Group } from "../../database/models/group.js";
-import type { Record } from "groq-sdk/core.mjs";
 
 export const filter = new Composer<MyContext>();
 

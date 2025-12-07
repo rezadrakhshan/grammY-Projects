@@ -232,4 +232,24 @@ user_info =
 
 		 Photos: {$photo_total}
  
-
+help_title = 📘 Help Center
+settings = Open bot settings
+addFilter = Add a filtered word
+removeFilter = Remove a filtered word
+clearFilter = Clear all filters
+filterList = Show all filters
+help = Show help menu
+info = Show bot info
+get_info = Show user info (reply only)
+language = Change bot language
+leaderboard = Show user rankings
+mute = Mute a user (reply)
+unmute = Unmute a user
+ban = Ban a user
+unban = Unban a user
+set_rules = Set group rules
+rules = Show group rules
+start = Start using the bot
+warn = Warn a user
+set_max = Set max warnings
+unwarn = Remove a warning

@@ -1,0 +1,82 @@
+[
+  {
+    "command": "/settings",
+    "key": "settings"
+  },
+  {
+    "command": "/addFilter",
+    "key": "addFilter"
+  },
+  {
+    "command": "/removeFilter",
+    "key": "removeFilter"
+  },
+  {
+    "command": "/clearFilter",
+    "key": "clearFilter"
+  },
+  {
+    "command": "/filterList",
+    "key": "filterList"
+  },
+  {
+    "command": "/help",
+    "key": "help"
+  },
+  {
+    "command": "/info",
+    "key": "info"
+  },
+  {
+    "command": "/get_info",
+    "key": "get_info"
+  },
+  {
+    "command": "/language",
+    "key": "language"
+  },
+  {
+    "command": "/leaderboard",
+    "key": "leaderboard"
+  },
+  {
+    "command": "/mute",
+    "key": "mute"
+  },
+  {
+    "command": "/unmute",
+    "key": "unmute"
+  },
+  {
+    "command": "/ban",
+    "key": "ban"
+  },
+  {
+    "command": "/unban",
+    "key": "unban"
+  },
+  {
+    "command": "/set_rules",
+    "key": "set_rules"
+  },
+  {
+    "command": "/rules",
+    "key": "rules"
+  },
+  {
+    "command": "/start",
+    "key": "start"
+  },
+  {
+    "command": "/warn",
+    "key": "warn"
+  },
+  {
+    "command": "/set_max",
+    "key": "set_max"
+  },
+  {
+    "command": "/unwarn",
+    "key": "unwarn"
+  }
+]
