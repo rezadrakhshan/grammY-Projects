@@ -1,82 +1,82 @@
 [
   {
     "command": "/settings",
-    "key": "settings"
+    "key": "settings_cmd"
   },
   {
     "command": "/addFilter",
-    "key": "addFilter"
+    "key": "addFilter_cmd"
   },
   {
     "command": "/removeFilter",
-    "key": "removeFilter"
+    "key": "removeFilter_cmd"
   },
   {
     "command": "/clearFilter",
-    "key": "clearFilter"
+    "key": "clearFilter_cmd"
   },
   {
     "command": "/filterList",
-    "key": "filterList"
+    "key": "filterList_cmd"
   },
   {
     "command": "/help",
-    "key": "help"
+    "key": "help_cmd"
   },
   {
     "command": "/info",
-    "key": "info"
+    "key": "info_cmd"
   },
   {
     "command": "/get_info",
-    "key": "get_info"
+    "key": "get_info_cmd"
   },
   {
     "command": "/language",
-    "key": "language"
+    "key": "language_cmd"
   },
   {
     "command": "/leaderboard",
-    "key": "leaderboard"
+    "key": "leaderboard_cmd"
   },
   {
     "command": "/mute",
-    "key": "mute"
+    "key": "mute_cmd"
   },
   {
     "command": "/unmute",
-    "key": "unmute"
+    "key": "unmute_cmd"
   },
   {
     "command": "/ban",
-    "key": "ban"
+    "key": "ban_cmd"
   },
   {
     "command": "/unban",
-    "key": "unban"
+    "key": "unban_cmd"
   },
   {
     "command": "/set_rules",
-    "key": "set_rules"
+    "key": "set_rules_cmd"
   },
   {
     "command": "/rules",
-    "key": "rules"
+    "key": "rules_cmd"
   },
   {
     "command": "/start",
-    "key": "start"
+    "key": "start_cmd"
   },
   {
     "command": "/warn",
-    "key": "warn"
+    "key": "warn_cmd"
   },
   {
     "command": "/set_max",
-    "key": "set_max"
+    "key": "set_max_cmd"
   },
   {
     "command": "/unwarn",
-    "key": "unwarn"
+    "key": "unwarn_cmd"
   }
 ]
