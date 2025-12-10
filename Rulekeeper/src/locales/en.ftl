@@ -253,3 +253,4 @@ start_cmd = Start using the bot
 warn_cmd = Warn a user
 set_max_cmd = Set max warnings
 unwarn_cmd = Remove a warning
+set_welcome_cmd = Set welcome message

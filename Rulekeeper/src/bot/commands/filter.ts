@@ -48,7 +48,7 @@ filter.command("removeFilter", async (ctx) => {
     (item) => !words.includes(item),
   );
   await group.save();
-  await ctx.reply(ctx.t("filter_words.remove"));
+  await ctx.reply(ctx.t("filter_words.removed"));
 });
 
 filter.command("clearFilter", async (ctx) => {

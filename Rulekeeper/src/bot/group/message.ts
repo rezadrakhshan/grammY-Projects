@@ -11,11 +11,9 @@ export const spamMap = new Map();
 const SPAM_LIMIT = 5;
 export const TIME_FRAME = 10000;
 
-message.on("message", async (ctx) => {
-  await addUserToDB(ctx, ctx.from);
-});
 
 message.on("message:text", async (ctx) => {
+  await addUserToDB(ctx, ctx.from);
   const text = ctx.message.text.toLowerCase();
   const group = await Group.findOne({ chatID: ctx.chat.id });
   if (!group) return;

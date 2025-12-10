@@ -78,5 +78,9 @@
   {
     "command": "/unwarn",
     "key": "unwarn_cmd"
+  },
+  {
+    "command": "/set_welcome",
+    "key": "set_welcome_cmd"
   }
 ]

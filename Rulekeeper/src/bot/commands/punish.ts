@@ -2,6 +2,7 @@ import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { isAdmin } from "../../guards/admin.js";
 import { User } from "../../database/models/user.js";
+import { Warning } from "../../database/models/userWarning.js";
 
 export const punish = new Composer<MyContext>();
 
@@ -53,13 +54,13 @@ punish.command("mute", async (ctx) => {
           minutes: minutes % 60,
         })
       : hours > 0
-        ? ctx.t("mute.format2", {
-            hours: hours,
-            minutes: minutes % 60,
-          })
-        : ctx.t("mute.format3", {
-            minutes: minutes,
-          });
+      ? ctx.t("mute.format2", {
+          hours: hours,
+          minutes: minutes % 60,
+        })
+      : ctx.t("mute.format3", {
+          minutes: minutes,
+        });
 
   const formattedDate = date.toLocaleString("en-US", {
     year: "numeric",
@@ -83,7 +84,7 @@ punish.command("mute", async (ctx) => {
       can_send_videos: false,
       can_send_voice_notes: false,
     },
-    { until_date: until },
+    { until_date: until }
   );
   await ctx.reply(
     ctx.t("mute.result", {
@@ -93,7 +94,7 @@ punish.command("mute", async (ctx) => {
     {
       reply_to_message_id: ctx.message?.reply_to_message?.message_id as number,
       parse_mode: "Markdown",
-    },
+    }
   );
 });
 
@@ -126,6 +127,8 @@ punish.command("unmute", async (ctx) => {
     can_send_documents: true,
     can_send_audios: true,
   });
+  const warning = await Warning.findOne({ chatID: chat, userID: user });
+  if (warning) await Warning.findOneAndDelete({ chatID: chat, userID: user });
   await ctx.reply(ctx.t("unmute"), {
     reply_to_message_id: ctx.message?.reply_to_message?.message_id as number,
   });
