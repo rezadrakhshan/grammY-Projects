@@ -56,12 +56,3 @@ message.on("message:text", async (ctx) => {
   if (group.rules) await aiGuard(ctx);
   await messageCounter(ctx);
 });
-
-message.on("message:forward_origin", async (ctx) => {
-  const group = await Group.findOne({ chatID: ctx.chat.id });
-  const isAdmin = group?.adminIDs.find((id) => id === ctx.from.id);
-  if (group?.antiSpam?.forwardBlock && !isAdmin) {
-    await ctx.deleteMessage();
-    return;
-  }
-});

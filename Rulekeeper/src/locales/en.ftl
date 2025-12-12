@@ -191,8 +191,8 @@ unban =
 
 anti-spam-on = 🛡️ Spam Shield Activated!
 anti-spam-off = 😴 Spam Shield Snoozing
-
-spam-mute 🚫 @{ $user }, You are being spamming! Please wait before sending more messages.
+ 
+spam-mute = 🚫 @{ $user }, You are being spamming! Please wait before sending more messages.
 
 link-block = 
 	.off = ✅ Link blocking has been turned off! 
@@ -208,8 +208,9 @@ leaderboard =
 	.message = messages
 
 ai = 
-	.inActive = AI Assistant is currently inactive 💤
-	.active = AI Assistant is now active 🎉
+    .inActive = AI Assistant is currently inactive 💤
+    .active = AI Assistant is now active 🎉
+    .need_rules = ⚠️ Please set group rules first!
 
 lang = 
 	.text = ✨ Please pick your preferred language below. I’ll make sure all messages feel natural to you.

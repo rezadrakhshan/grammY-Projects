@@ -15,19 +15,32 @@ const blockItem = {
   "message:audio": "musicBlock",
   "message:sticker": "stickerBlock",
   "message:voice": "voiceBlock",
+  "message:forward_origin": "forwardBlock",
 };
 
 for (const [key, value] of Object.entries(blockItem)) {
   blockComposer.on(key as any, async (ctx) => {
+    console.log(1);
     const chat: any = ctx.chat;
     const user: any = ctx.from;
     const group = await Group.findOne({ chatID: chat.id });
     const isAdmin = group?.adminIDs.find((admin) => admin === user.id);
     if (!group) return;
     const antispam = group.antiSpam as Record<string, any> | undefined;
+
+    const forward = (ctx.message as any)?.forward_origin;
+
+    if (forward) {
+      if (antispam?.forwardBlock && !isAdmin) {
+        await ctx.deleteMessage();
+      }
+      return;
+    }
+
     try {
       if (!isAdmin) {
         if (antispam?.[value]) {
+          console.log(5);
           const msg =
             ctx.message ??
             (ctx.editedMessage as { message_id?: number } | undefined);
