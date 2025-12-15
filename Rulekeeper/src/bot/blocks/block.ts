@@ -2,6 +2,7 @@ import { Composer } from "grammy";
 import { type MyContext } from "../../index.js";
 import { Group } from "../../database/models/group.js";
 import type { Record } from "groq-sdk/core.mjs";
+import { isUser } from "../../guards/user.js";
 
 export const blockComposer = new Composer<MyContext>();
 
@@ -20,39 +21,41 @@ const blockItem = {
 
 for (const [key, value] of Object.entries(blockItem)) {
   blockComposer.on(key as any, async (ctx) => {
-    console.log(1);
-    const chat: any = ctx.chat;
-    const user: any = ctx.from;
-    const group = await Group.findOne({ chatID: chat.id });
-    const isAdmin = group?.adminIDs.find((admin) => admin === user.id);
-    if (!group) return;
-    const antispam = group.antiSpam as Record<string, any> | undefined;
+    const userStatus = await isUser(ctx);
+    if (userStatus) {
+      const chat: any = ctx.chat;
+      const user: any = ctx.from;
+      const group = await Group.findOne({ chatID: chat.id });
+      const isAdmin = group?.adminIDs.find((admin) => admin === user.id);
+      if (!group) return;
+      const antispam = group.antiSpam as Record<string, any> | undefined;
 
-    const forward = (ctx.message as any)?.forward_origin;
+      const forward = (ctx.message as any)?.forward_origin;
 
-    if (forward) {
-      if (antispam?.forwardBlock && !isAdmin) {
-        await ctx.deleteMessage();
+      if (forward) {
+        if (antispam?.forwardBlock && !isAdmin) {
+          await ctx.deleteMessage();
+        }
+        return;
       }
-      return;
-    }
 
-    try {
-      if (!isAdmin) {
-        if (antispam?.[value]) {
-          console.log(5);
-          const msg =
-            ctx.message ??
-            (ctx.editedMessage as { message_id?: number } | undefined);
-          if (msg?.message_id != null) {
-            await ctx.api.deleteMessage(chat.id, msg.message_id);
-          } else {
-            await ctx.deleteMessage();
+      try {
+        if (!isAdmin) {
+          if (antispam?.[value]) {
+            console.log(5);
+            const msg =
+              ctx.message ??
+              (ctx.editedMessage as { message_id?: number } | undefined);
+            if (msg?.message_id != null) {
+              await ctx.api.deleteMessage(chat.id, msg.message_id);
+            } else {
+              await ctx.deleteMessage();
+            }
           }
         }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   });
 }

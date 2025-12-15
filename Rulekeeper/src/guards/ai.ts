@@ -1,6 +1,6 @@
 import { type MyContext } from "../index.js";
 import { Group } from "../database/models/group.js";
-import { groq } from "../ai/ai.js";
+import { client } from "../ai/ai.js";
 
 export async function aiGuard(ctx: MyContext) {
   const group = await Group.findOne({ chatID: ctx.chat?.id }).select("rules");
@@ -20,8 +20,8 @@ Instructions:
 - Output must be exactly either True or False.
 `;
 
-  const completion = await groq.chat.completions.create({
-    model: "openai/gpt-oss-20b",
+  const completion = await client.chat.completions.create({
+    model: "google/gemini-2.0-flash-001",
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: ctx.message?.text ?? "" },
@@ -29,7 +29,7 @@ Instructions:
   });
 
   const result = completion.choices[0]?.message.content;
-  if (result === "False") {
+  if (result?.trim() == "False") {
     await ctx.deleteMessage();
   }
 }
