@@ -56,16 +56,19 @@ RuleKeeper is a powerful Telegram group management bot designed to automate mode
 ```text
 rulekeeper/
 ├── src/
-│   ├── bot/            # Bot initialization and core logic
-│   ├── commands/       # Bot commands
-│   ├── composers/      # grammY composers and middlewares
+│   ├── bot/            # Bot commands , callback query
+│   ├── ai/             # Ai configuration
+│   ├── guards/         # Role managment
 │   ├── database/       # Database models and services
-│   ├── i18n/           # Localization files
-│   ├── middlewares/    # Custom middlewares
-│   └── utils/          # Utility functions
+│   ├── helper/         # Helper functions e.g: message counter
+│   ├── interface/      # Bot session type
+│   └── json/           # Bot commands list
+│   └── keyboard/       # All keyboard button used in bot
+│   └── locales/        # I18n files
+│   └── index.ts        # Main file
 ├── docker-compose.yml
 ├── Dockerfile
-├── .env.example
+├── .env-example
 ├── package.json
 └── README.md
 ```
@@ -98,7 +101,7 @@ npm install
 
 ## Environment Variables
 
-Create a `.env` file based on `.env.example`:
+Create a `.env` file based on `.env-example`:
 
 ```env
 BOT=your_telegram_bot_token
@@ -159,14 +162,14 @@ Make sure MongoDB and Redis services are properly configured in `docker-compose.
 RuleKeeper uses a structured localization system. Translation files are located under:
 
 ```text
-src/i18n/locales/
-├── en/
-│   └── translation.json
-├── fa/
-│   └── translation.json
+src/locales/
+|
+│   en.ftl
+│   ru.ftl
+│   fa.ftl
 ```
 
-Adding a new language only requires creating a new locale folder and translation file.
+Adding a new language only requires creating a new locale file.
 
 ---
 
@@ -180,7 +183,6 @@ Adding a new language only requires creating a new locale folder and translation
 
 ## Roadmap
 
-* Web-based admin dashboard
 * AI-powered spam detection
 * More granular role management
 * Advanced analytics and reports
@@ -209,7 +211,7 @@ This project is licensed under the MIT License.
 ## Author
 
 **Seyed Reza Derakhshan**
-Backend Developer | Node.js | Telegram Bots
+Backend Developer | Node.js & TypeScript Enthusiast
 
 ---
 
