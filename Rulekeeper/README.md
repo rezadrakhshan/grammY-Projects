@@ -84,7 +84,7 @@ rulekeeper/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/rulekeeper.git
+git clone https://github.com/rezadrakhshan/grammY-Projects.git
 cd rulekeeper
 ```
 
