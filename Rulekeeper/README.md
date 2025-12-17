@@ -101,10 +101,11 @@ npm install
 Create a `.env` file based on `.env.example`:
 
 ```env
-BOT_TOKEN=your_telegram_bot_token
+BOT=your_telegram_bot_token
 MONGO_URL=mongodb://localhost:27017/rulekeeper
 REDIS_URL=redis://localhost:6379
-NODE_ENV=production
+AI_BASE_URL=
+AI_KEY=
 ```
 
 ---
