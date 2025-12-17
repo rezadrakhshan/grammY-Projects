@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  rulekeeper:
+    build: .
+    container_name: rulekeeper-bot
+    restart: always
+    environment:
+      BOT_TOKEN: "${BOT_TOKEN}"
+      MONGO_URL: "mongodb://mongo:27017/rulekeeper"
+      REDIS_URL: "redis://redis:6379"
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:7
+    container_name: rulekeeper-mongo
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:7-alpine
+    container_name: rulekeeper-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  redis_data:
